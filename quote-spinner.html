@@ -11,16 +11,23 @@
   h2 { font-weight:700; font-size:20px; margin:12px 0; }
   #stage { position:relative; width:var(--size); height:var(--size); margin: 8px auto 12px; }
   #wheel { width:100%; height:100%; display:block; }
-  .pointer {
-    position:absolute; top:-8px; left:50%; transform:translateX(-50%);
-    width:0; height:0; border-left:10px solid transparent; border-right:10px solid transparent; border-bottom:18px solid #111;
+
+  /* ▼ Pointer pointing DOWN */
+  .pointer{
+    position:absolute; top:-10px; left:50%; transform:translateX(-50%);
+    width:0; height:0;
+    border-left:10px solid transparent; border-right:10px solid transparent;
+    border-top:18px solid #111; /* downwards */
   }
-  button {
+
+  button{
     padding:10px 18px; font-size:16px; border-radius:10px; cursor:pointer;
     background:#BE5F93; color:#fff; border:2px solid #a44d7b;
   }
-  button:hover { background:#a44d7b; }
-  #quote { margin:14px auto 10px; font-style:italic; font-size:18px; min-height:64px; max-width: 680px; }
+  button:hover{ background:#a44d7b; }
+  button:focus{ outline:2px solid #a44d7b; outline-offset:2px; }
+
+  #quote{ margin:14px auto 10px; font-style:italic; font-size:18px; min-height:64px; max-width:680px; }
 </style>
 </head>
 <body>
@@ -35,89 +42,159 @@
   </div>
 
 <script>
-/* ======== QUOTES ======== */
+/* ========= QUOTES ========= */
 const QUOTES = [
-  { who: "Dai Vernon", text: "Be natural." },
-  { who: "Robert-Houdin", text: "A magician is an actor playing the part of a magician." },
-  { who: "Karl Germain", text: "Magic is the only honest profession. A magician promises to deceive you and he does." },
-  { who: "David Devant", text: "The real secret of magic lies in the performance." },
-  { who: "Juan Tamariz", text: "The difference between a good trick and a great trick is presentation." },
-  { who: "Hugard & Braue", text: "If you want to be an artist, don’t imitate. Be yourself." },
-  { who: "Tommy Wonder", text: "The effect is what the audience perceives, not what you do." },
-  { who: "Slydini", text: "You must relax." }
+  { who: "Dai Vernon",       text: "Be natural." },
+  { who: "Robert-Houdin",    text: "A magician is an actor playing the part of a magician." },
+  { who: "Karl Germain",     text: "Magic is the only honest profession. A magician promises to deceive you and he does." },
+  { who: "David Devant",     text: "The real secret of magic lies in the performance." },
+  { who: "Juan Tamariz",     text: "The difference between a good trick and a great trick is presentation." },
+  { who: "Hugard & Braue",   text: "If you want to be an artist, don’t imitate. Be yourself." },
+  { who: "Tommy Wonder",     text: "The effect is what the audience perceives, not what you do." },
+  { who: "Slydini",          text: "You must relax." }
 ];
 
-/* ======== THEME (HARD-CODED) ======== */
-const baseHex = "#BE5F93";  // fixed; no URL param parsing
-
+/* ========= THEME & PALETTE ========= */
+const baseHex = "#BE5F93";
 function hexToHsl(hex){
   let r=0,g=0,b=0,m=hex.replace("#","");
   if(m.length===3){ r=parseInt(m[0]+m[0],16); g=parseInt(m[1]+m[1],16); b=parseInt(m[2]+m[2],16); }
-  else { r=parseInt(m.slice(0,2),16); g=parseInt(m.slice(2,4),16); b=parseInt(m.slice(4,6),16); }
-  r/=255; g/=255; b/=255; const max=Math.max(r,g,b), min=Math.min(r,g,b);
+  else{ r=parseInt(m.slice(0,2),16); g=parseInt(m.slice(2,4),16); b=parseInt(m.slice(4,6),16); }
+  r/=255; g/=255; b/=255;
+  const max=Math.max(r,g,b), min=Math.min(r,g,b);
   let h,s,l=(max+min)/2;
-  if(max===min){ h=s=0; } else { const d=max-min; s=l>0.5? d/(2-max-min): d/(max+min);
-    switch(max){ case r:h=(g-b)/d+(g<b?6:0); break; case g:h=(b-r)/d+2; break; case b:h=(r-g)/d+4; }
+  if(max===min){ h=s=0; }
+  else{
+    const d=max-min;
+    s=l>0.5? d/(2-max-min): d/(max+min);
+    switch(max){ case r:h=(g-b)/d+(g<b?6:0); break; case g:h=(b-r)/d+2; break; case b:h=(r-g)/d+4; break; }
     h/=6;
   }
-  return {h:h*360,s:s*100,l:l*100};
+  return {h:h*360, s:s*100, l:l*100};
 }
 const hsl=(h,s,l)=>`hsl(${h.toFixed(1)} ${s.toFixed(1)}% ${l.toFixed(1)}%)`;
 function paletteFromBase(hex){
   const {h,s,l}=hexToHsl(hex);
   return [
-    hsl(h, Math.min(90, s), Math.min(85, l+25)),
-    hsl(h, Math.min(90, s), Math.min(78, l+18)),
-    hsl(h, Math.min(90, s), Math.max(45, l-2)),
-    hsl(h, Math.min(90, s), Math.max(38, l-10))
+    hsl(h, Math.min(90,s), Math.min(85, l+25)),
+    hsl(h, Math.min(90,s), Math.min(78, l+18)),
+    hsl(h, Math.min(90,s), Math.max(45, l-2)),
+    hsl(h, Math.min(90,s), Math.max(38, l-10))
   ];
 }
 const COLORS = paletteFromBase(baseHex);
 
-/* ======== DRAW/SPIN ======== */
-const canvas=document.getElementById("wheel"), ctx=canvas.getContext("2d");
-const size=canvas.width, r=size/2, N=QUOTES.length, SEG=(2*Math.PI)/N;
-let baseDeg=0, spinning=false, highlightIdx=null;
+/* ========= DRAW / SPIN ========= */
+const canvas = document.getElementById("wheel");
+const ctx = canvas.getContext("2d");
+const size = canvas.width, r = size/2;
+const N = QUOTES.length, SEG = (2*Math.PI)/N;
 
-function drawWheel(rot=0){
+let baseDeg = 0;          // total rotation in degrees
+let spinning = false;
+let highlightIdx = null;
+
+function drawWheel(rotRad=0){
   ctx.clearRect(0,0,size,size);
   for(let i=0;i<N;i++){
-    const start=i*SEG+rot, end=start+SEG;
-    ctx.beginPath(); ctx.moveTo(r,r); ctx.arc(r,r,r-2,start,end); ctx.closePath();
-    ctx.fillStyle=COLORS[i%COLORS.length]; ctx.fill();
-    ctx.lineWidth=(highlightIdx===i)?6:2;
-    ctx.strokeStyle=(highlightIdx===i)?baseHex:"#ffffff"; ctx.stroke();
-    ctx.save(); ctx.translate(r,r); ctx.rotate(start+SEG/2);
-    ctx.textAlign="right"; ctx.fillStyle="#111"; ctx.font="bold 13px Georgia";
-    ctx.fillText(QUOTES[i].who, r-12, 4); ctx.restore();
+    const start = i*SEG + rotRad;
+    const end   = start + SEG;
+
+    ctx.beginPath();
+    ctx.moveTo(r,r);
+    ctx.arc(r,r,r-2,start,end);
+    ctx.closePath();
+    ctx.fillStyle = COLORS[i%COLORS.length];
+    ctx.fill();
+
+    ctx.lineWidth = (highlightIdx===i)?6:2;
+    ctx.strokeStyle = (highlightIdx===i)?baseHex:"#ffffff";
+    ctx.stroke();
+
+    ctx.save();
+    ctx.translate(r,r);
+    ctx.rotate(start + SEG/2);
+    ctx.textAlign = "right";
+    ctx.fillStyle = "#111";
+    ctx.font = "bold 13px Georgia";
+    ctx.fillText(QUOTES[i].who, r-12, 4);
+    ctx.restore();
   }
 }
 
 function spin(){
   if(spinning) return;
-  highlightIdx=null; document.getElementById("quote").textContent="";
-  spinning=true; const extra=720+Math.random()*540, start=performance.now(), dur=2400;
-  (function anim(t){
-    const p=Math.min(1,(t-start)/dur), ease=1-Math.pow(1-p,3), deg=extra*ease;
-    drawWheel(((baseDeg+deg)*Math.PI/180));
-    if(p<1) requestAnimationFrame(anim);
-    else { baseDeg=(baseDeg+extra)%360; spinning=false; showResult(); }
+  highlightIdx = null;
+  document.getElementById("quote").textContent = "";
+  spinning = true;
+
+  const extra = 720 + Math.random()*540;  // 2–3.5 turns
+  const start = performance.now();
+  const dur = 2400;
+
+  (function animate(t){
+    const p = Math.min(1, (t - start) / dur);
+    const ease = 1 - Math.pow(1 - p, 3);   // easeOutCubic
+    const deg = extra * ease;
+    drawWheel(((baseDeg + deg) * Math.PI/180));
+    if(p < 1){
+      requestAnimationFrame(animate);
+    }else{
+      baseDeg = (baseDeg + extra) % 360;
+      // compute winner, then smooth snap so it lands centered on top
+      const { index, degPer } = currentWinner();
+      smoothSnapToSlice(index, degPer, () => {
+        highlightResult(index);
+        const { who, text } = QUOTES[index];
+        setTimeout(()=>{ document.getElementById("quote").textContent = `“${text}” — ${who}`; }, 120);
+        spinning = false;
+      });
+    }
   })(start);
 }
 
-function showResult(){
-  const degPer=360/N, rot=((baseDeg%360)+360)%360, opposite=(360-rot)%360;
-  const index=Math.floor((opposite+degPer/2)/degPer)%N;
-  highlightResult(index);
-  const {who,text}=QUOTES[index];
-  setTimeout(()=>{ document.getElementById("quote").textContent=`“${text}” — ${who}`; }, 100);
+/* Determine which slice is under the pointer right now */
+function currentWinner(){
+  const degPer = 360 / N;
+  const rot = ((baseDeg % 360) + 360) % 360;      // 0..359
+  const opposite = (360 - rot) % 360;             // angle under pointer
+  const index = Math.floor((opposite + degPer/2) / degPer) % N;
+  return { index, degPer };
+}
+
+/* Smoothly rotate so the chosen slice center sits at 0° (top) */
+function smoothSnapToSlice(index, degPer, onDone){
+  // target angle where slice center is at top
+  const targetDeg = (360 - (index*degPer + degPer/2)) % 360;
+  let delta = (targetDeg - baseDeg) % 360;
+  if(delta < -180) delta += 360;
+  if(delta > 180)  delta -= 360;
+
+  const start = performance.now();
+  const dur = 320; // short, snappy finish
+
+  (function snapStep(t){
+    const p = Math.min(1, (t - start) / dur);
+    const ease = 1 - Math.pow(1 - p, 2);  // easeOutQuad
+    const added = delta * ease;
+    drawWheel(((baseDeg + added) * Math.PI/180));
+    if(p < 1){
+      requestAnimationFrame(snapStep);
+    }else{
+      baseDeg = (baseDeg + delta + 360) % 360;
+      drawWheel(baseDeg * Math.PI/180);
+      if(onDone) onDone();
+    }
+  })(start);
 }
 
 function highlightResult(idx){
-  let flashes=6;
+  let flashes = 6;
   (function blink(){
-    highlightIdx=(flashes%2===0)?idx:null; drawWheel(baseDeg*Math.PI/180);
-    if(--flashes>0) setTimeout(blink, 90); else { highlightIdx=idx; drawWheel(baseDeg*Math.PI/180); }
+    highlightIdx = (flashes % 2 === 0) ? idx : null;
+    drawWheel(baseDeg * Math.PI/180);
+    if(--flashes > 0) setTimeout(blink, 90);
+    else { highlightIdx = idx; drawWheel(baseDeg * Math.PI/180); }
   })();
 }
 
