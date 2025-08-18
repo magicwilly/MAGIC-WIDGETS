@@ -16,11 +16,11 @@
     width:0; height:0; border-left:10px solid transparent; border-right:10px solid transparent; border-bottom:18px solid #111;
   }
   button {
-    padding:10px 18px; font-size:16px; border-radius:10px; border:1px solid #ddd; cursor:pointer;
-    background:#fafafa;
+    padding:10px 18px; font-size:16px; border-radius:10px; cursor:pointer;
+    background:#BE5F93; color:#fff; border:2px solid #a44d7b;
   }
+  button:hover { background:#a44d7b; }
   #quote { margin:14px auto 10px; font-style:italic; font-size:18px; min-height:64px; max-width: 680px; }
-  .credit { font-size:12px; opacity:.6; margin-top:6px; }
 </style>
 </head>
 <body>
@@ -32,7 +32,6 @@
     </div>
     <button id="spinBtn">Spin the Wheel!</button>
     <p id="quote"></p>
-    <div class="credit">Tip: add <code>?color=%23a855f7</code> (or any hex) to the URL to theme it.</div>
   </div>
 
 <script>
@@ -48,35 +47,24 @@ const QUOTES = [
   { who: "Slydini", text: "You must relax." }
 ];
 
-/* ======== THEME COLOR -> PALETTE ======== */
-const params = new URLSearchParams(location.search);
-const baseHex = params.get("color") || "#f39c12";   // fallback if not provided
+/* ======== THEME (HARD-CODED) ======== */
+const baseHex = "#BE5F93";  // fixed; no URL param parsing
 
 function hexToHsl(hex){
-  let r = 0, g = 0, b = 0;
-  const m = hex.replace("#",""); 
-  if (m.length === 3) { r = parseInt(m[0]+m[0],16); g=parseInt(m[1]+m[1],16); b=parseInt(m[2]+m[2],16); }
-  else { r=parseInt(m.substring(0,2),16); g=parseInt(m.substring(2,4),16); b=parseInt(m.substring(4,6),16); }
-  r/=255; g/=255; b/=255;
-  const max=Math.max(r,g,b), min=Math.min(r,g,b);
+  let r=0,g=0,b=0,m=hex.replace("#","");
+  if(m.length===3){ r=parseInt(m[0]+m[0],16); g=parseInt(m[1]+m[1],16); b=parseInt(m[2]+m[2],16); }
+  else { r=parseInt(m.slice(0,2),16); g=parseInt(m.slice(2,4),16); b=parseInt(m.slice(4,6),16); }
+  r/=255; g/=255; b/=255; const max=Math.max(r,g,b), min=Math.min(r,g,b);
   let h,s,l=(max+min)/2;
-  if(max===min){ h=s=0; }
-  else{
-    const d=max-min;
-    s=l>0.5 ? d/(2-max-min) : d/(max+min);
-    switch(max){
-      case r: h=(g-b)/d+(g<b?6:0); break;
-      case g: h=(b-r)/d+2; break;
-      case b: h=(r-g)/d+4; break;
-    }
+  if(max===min){ h=s=0; } else { const d=max-min; s=l>0.5? d/(2-max-min): d/(max+min);
+    switch(max){ case r:h=(g-b)/d+(g<b?6:0); break; case g:h=(b-r)/d+2; break; case b:h=(r-g)/d+4; }
     h/=6;
   }
-  return {h: h*360, s: s*100, l: l*100};
+  return {h:h*360,s:s*100,l:l*100};
 }
-function hsl(h,s,l){ return `hsl(${h.toFixed(1)} ${s.toFixed(1)}% ${l.toFixed(1)}%)`; }
+const hsl=(h,s,l)=>`hsl(${h.toFixed(1)} ${s.toFixed(1)}% ${l.toFixed(1)}%)`;
 function paletteFromBase(hex){
-  const {h,s,l} = hexToHsl(hex);
-  // four tints from light to dark around the same hue/sat
+  const {h,s,l}=hexToHsl(hex);
   return [
     hsl(h, Math.min(90, s), Math.min(85, l+25)),
     hsl(h, Math.min(90, s), Math.min(78, l+18)),
@@ -86,95 +74,54 @@ function paletteFromBase(hex){
 }
 const COLORS = paletteFromBase(baseHex);
 
-/* ======== DRAWING / SPINNING ======== */
-const canvas = document.getElementById("wheel");
-const ctx = canvas.getContext("2d");
-const size = canvas.width;              // 320
-const r = size/2;                       // 160
-const N = QUOTES.length;
-const SEG = (2*Math.PI)/N;
-
+/* ======== DRAW/SPIN ======== */
+const canvas=document.getElementById("wheel"), ctx=canvas.getContext("2d");
+const size=canvas.width, r=size/2, N=QUOTES.length, SEG=(2*Math.PI)/N;
 let baseDeg=0, spinning=false, highlightIdx=null;
 
 function drawWheel(rot=0){
   ctx.clearRect(0,0,size,size);
   for(let i=0;i<N;i++){
-    const start = i*SEG + rot;
-    const end   = start + SEG;
-
-    // fill
-    ctx.beginPath();
-    ctx.moveTo(r,r);
-    ctx.arc(r,r,r-2,start,end);
-    ctx.closePath();
-    ctx.fillStyle = COLORS[i%COLORS.length];
-    ctx.fill();
-
-    // stroke (thicker if highlighted)
-    ctx.lineWidth = (highlightIdx===i) ? 6 : 2;
-    ctx.strokeStyle = (highlightIdx===i) ? "#111" : "#ffffff";
-    ctx.stroke();
-
-    // label
-    ctx.save();
-    ctx.translate(r,r);
-    ctx.rotate(start + SEG/2);
-    ctx.textAlign = "right";
-    ctx.fillStyle = "#111";
-    ctx.font = "bold 13px Georgia";
-    ctx.fillText(QUOTES[i].who, r-12, 4);
-    ctx.restore();
+    const start=i*SEG+rot, end=start+SEG;
+    ctx.beginPath(); ctx.moveTo(r,r); ctx.arc(r,r,r-2,start,end); ctx.closePath();
+    ctx.fillStyle=COLORS[i%COLORS.length]; ctx.fill();
+    ctx.lineWidth=(highlightIdx===i)?6:2;
+    ctx.strokeStyle=(highlightIdx===i)?baseHex:"#ffffff"; ctx.stroke();
+    ctx.save(); ctx.translate(r,r); ctx.rotate(start+SEG/2);
+    ctx.textAlign="right"; ctx.fillStyle="#111"; ctx.font="bold 13px Georgia";
+    ctx.fillText(QUOTES[i].who, r-12, 4); ctx.restore();
   }
 }
 
 function spin(){
   if(spinning) return;
-  highlightIdx=null;
-  document.getElementById("quote").textContent = "";
-  spinning = true;
-  const extra = 720 + Math.random()*540;           // 2–3.5 turns
-  const start = performance.now();
-  const dur = 2400;
-
-  (function animate(t){
-    const p = Math.min(1, (t-start)/dur);
-    const ease = 1 - Math.pow(1-p, 3);
-    const deg = extra*ease;
-    drawWheel(( (baseDeg+deg) * Math.PI/180 ));
-    if(p<1) requestAnimationFrame(animate);
-    else { baseDeg = (baseDeg + extra) % 360; spinning=false; showResult(); }
+  highlightIdx=null; document.getElementById("quote").textContent="";
+  spinning=true; const extra=720+Math.random()*540, start=performance.now(), dur=2400;
+  (function anim(t){
+    const p=Math.min(1,(t-start)/dur), ease=1-Math.pow(1-p,3), deg=extra*ease;
+    drawWheel(((baseDeg+deg)*Math.PI/180));
+    if(p<1) requestAnimationFrame(anim);
+    else { baseDeg=(baseDeg+extra)%360; spinning=false; showResult(); }
   })(start);
 }
 
 function showResult(){
-  const degPer = 360 / N;
-  const rot = ((baseDeg % 360) + 360) % 360;
-  const opposite = (360 - rot) % 360;
-  const index = Math.floor((opposite + degPer/2) / degPer) % N;
-
-  // flash highlight on the winning slice
+  const degPer=360/N, rot=((baseDeg%360)+360)%360, opposite=(360-rot)%360;
+  const index=Math.floor((opposite+degPer/2)/degPer)%N;
   highlightResult(index);
-
-  const { who, text } = QUOTES[index];
-  setTimeout(()=>{  // reveal after the flash begins
-    document.getElementById("quote").textContent = `“${text}” — ${who}`;
-  }, 80);
+  const {who,text}=QUOTES[index];
+  setTimeout(()=>{ document.getElementById("quote").textContent=`“${text}” — ${who}`; }, 100);
 }
 
 function highlightResult(idx){
-  let flashes = 6;
-  function tick(){
-    highlightIdx = (flashes % 2 === 0) ? idx : null;
-    drawWheel(baseDeg * Math.PI/180);
-    if(--flashes>0) setTimeout(tick, 90);
-    else { highlightIdx = idx; drawWheel(baseDeg * Math.PI/180); }
-  }
-  tick();
+  let flashes=6;
+  (function blink(){
+    highlightIdx=(flashes%2===0)?idx:null; drawWheel(baseDeg*Math.PI/180);
+    if(--flashes>0) setTimeout(blink, 90); else { highlightIdx=idx; drawWheel(baseDeg*Math.PI/180); }
+  })();
 }
 
 document.getElementById("spinBtn").addEventListener("click", spin);
-
-// initial draw
 drawWheel(0);
 </script>
 </body>
