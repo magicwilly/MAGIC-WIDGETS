@@ -11,12 +11,14 @@
   #stage { position:relative; width:var(--size); height:var(--size); margin: 8px auto 12px; }
   #wheel { width:100%; height:100%; display:block; }
 
-  /* ▶ Pointer pointing LEFT (placed at right side 3:00) */
+  /* ▶ Pointer at RIGHT (3:00), pointing LEFT (toward wheel) */
   .pointer{
-    position:absolute; top:50%; left:100%; transform:translate(-50%,-50%) rotate(-90deg);
+    position:absolute; top:50%; left:100%;
+    transform: translate(-100%,-50%); /* sit on the rim */
     width:0; height:0;
-    border-top:10px solid transparent; border-bottom:10px solid transparent;
-    border-left:18px solid #111; /* arrow pointing left */
+    border-top:10px solid transparent;
+    border-bottom:10px solid transparent;
+    border-left:18px solid #111; /* triangle points LEFT */
   }
 
   button{
@@ -139,8 +141,8 @@ function spin(){
       requestAnimationFrame(animate);
     }else{
       baseDeg = (baseDeg + extra) % 360;
-      const { index, degPer } = currentWinner();
-      smoothSnapToSlice(index, degPer, () => {
+      const { index, degPer } = currentWinner();           // winner for pointer at 3:00
+      smoothSnapToSlice(index, degPer, () => {             // snap winner to 3:00
         highlightResult(index);
         const { who, text } = QUOTES[index];
         setTimeout(()=>{ document.getElementById("quote").textContent = `“${text}” — ${who}`; }, 120);
@@ -150,18 +152,19 @@ function spin(){
   })(start);
 }
 
-/* Winner calc: pointer at 3:00 */
+/* Winner calc with pointer at 3:00 (0°) */
 function currentWinner(){
   const degPer = 360 / N;
-  const rot = ((baseDeg % 360) + 360) % 360;
-  const opposite = (90 - rot + 360) % 360;   // pointer at 90° (3:00)
-  const index = Math.floor((opposite + degPer/2) / degPer) % N;
+  const rot = ((baseDeg % 360) + 360) % 360;   // wheel rotation
+  const underPointer = (360 - rot) % 360;      // angle centered at 3:00
+  const index = Math.floor((underPointer + degPer/2) / degPer) % N;
   return { index, degPer };
 }
 
-/* Smooth snap */
+/* Smooth snap so slice center sits exactly at 3:00 (0°) */
 function smoothSnapToSlice(index, degPer, onDone){
-  const targetDeg = (90 - (index*degPer + degPer/2) + 360) % 360;
+  const center = index*degPer + degPer/2;
+  const targetDeg = (360 - center) % 360;      // align center to 0°
   let delta = (targetDeg - baseDeg) % 360;
   if(delta < -180) delta += 360;
   if(delta > 180)  delta -= 360;
@@ -171,7 +174,7 @@ function smoothSnapToSlice(index, degPer, onDone){
 
   (function snapStep(t){
     const p = Math.min(1, (t - start) / dur);
-    const ease = 1 - Math.pow(1 - p, 2);
+    const ease = 1 - Math.pow(1 - p, 2);      // easeOutQuad
     const added = delta * ease;
     drawWheel(((baseDeg + added) * Math.PI/180));
     if(p < 1){
