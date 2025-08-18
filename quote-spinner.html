@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Magic Quote Spinner</title>
+<style>
+  :root { --size: 320px; }
+  html,body { margin:0; padding:0; background:transparent; font-family: Georgia, serif; color:#111; }
+  .wrap { max-width: var(--size); margin: 0 auto; text-align:center; }
+  h2 { font-weight:700; font-size:20px; margin:12px 0; }
+  #stage { position:relative; width:var(--size); height:var(--size); margin: 8px auto 12px; }
+  #wheel { width:100%; height:100%; display:block; }
+  .pointer {
+    position:absolute; top:-8px; left:50%; transform:translateX(-50%);
+    width:0; height:0; border-left:10px solid transparent; border-right:10px solid transparent; border-bottom:18px solid #111;
+  }
+  button {
+    padding:10px 18px; font-size:16px; border-radius:10px; border:1px solid #ddd; cursor:pointer;
+    background:#fafafa;
+  }
+  #quote { margin:14px auto 10px; font-style:italic; font-size:18px; min-height:64px; max-width: 680px; }
+  .credit { font-size:12px; opacity:.6; margin-top:6px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h2>🎩 Magic Quote Spinner</h2>
+    <div id="stage">
+      <div class="pointer" aria-hidden="true"></div>
+      <canvas id="wheel" width="320" height="320"></canvas>
+    </div>
+    <button id="spinBtn">Spin the Wheel!</button>
+    <p id="quote"></p>
+    <div class="credit">Tip: click again for a new spin.</div>
+  </div>
+
+<script>
+/* ======== DATA ======== */
+const QUOTES = [
+  { who: "Dai Vernon", text: "Be natural." },
+  { who: "Robert-Houdin", text: "A magician is an actor playing the part of a magician." },
+  { who: "Karl Germain", text: "Magic is the only honest profession. A magician promises to deceive you and he does." },
+  { who: "David Devant", text: "The real secret of magic lies in the performance." },
+  { who: "Juan Tamariz", text: "The difference between a good trick and a great trick is presentation." },
+  { who: "Hugard & Braue", text: "If you want to be an artist, don’t imitate. Be yourself." },
+  { who: "Tommy Wonder", text: "The effect is what the audience perceives, not what you do." },
+  { who: "Slydini", text: "You must relax." }
+];
+
+/* ======== DRAWING ======== */
+const canvas = document.getElementById("wheel");
+const ctx = canvas.getContext("2d");
+const size = canvas.width;              // 320
+const r = size/2;                       // 160
+const N = QUOTES.length;
+const SEG = (2*Math.PI)/N;
+const COLORS = ["#f9d976","#f6b965","#f39c12","#f6d365"]; // alternating
+
+function drawWheel(rot=0){
+  ctx.clearRect(0,0,size,size);
+  for(let i=0;i<N;i++){
+    const start = i*SEG + rot;
+    const end   = start + SEG;
+    ctx.beginPath();
+    ctx.moveTo(r,r);
+    ctx.arc(r,r,r-2,start,end);
+    ctx.closePath();
+    ctx.fillStyle = COLORS[i%COLORS.length];
+    ctx.fill();
+    ctx.strokeStyle = "#ffffff";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // labels (names)
+    ctx.save();
+    ctx.translate(r,r);
+    ctx.rotate(start + SEG/2);
+    ctx.textAlign = "right";
+    ctx.fillStyle = "#111";
+    ctx.font = "bold 13px Georgia";
+    ctx.fillText(QUOTES[i].who, r-12, 4);
+    ctx.restore();
+  }
+}
+
+let spinning=false, baseDeg=0;
+drawWheel(0);
+
+function spin(){
+  if(spinning) return;
+  spinning = true;
+  const extra = 720 + Math.random()*540;           // 2 to 3.5 turns
+  const start = performance.now();
+  const dur = 2400;                                // ms
+  const startDeg = baseDeg;
+
+  (function animate(t){
+    const p = Math.min(1, (t-start)/dur);
+    const ease = 1 - Math.pow(1-p, 3);             // easeOutCubic
+    const deg = startDeg + extra*ease;
+    baseDeg = deg;
+    drawWheel((deg*Math.PI/180));
+    if(p<1) requestAnimationFrame(animate);
+    else { spinning=false; showResult(); }
+  })(start);
+}
+
+function showResult(){
+  // 0deg means pointer at top; convert baseDeg to segment
+  const norm = ((baseDeg%360)+360)%360;            // 0..359
+  const degPer = 360/N;
+  const index = Math.floor(((360 - norm) % 360) / degPer) % N;
+  const {who,text} = QUOTES[index];
+  document.getElementById("quote").textContent = `“${text}” — ${who}`;
+}
+
+document.getElementById("spinBtn").addEventListener("click", spin);
+</script>
+</body>
+</html>
