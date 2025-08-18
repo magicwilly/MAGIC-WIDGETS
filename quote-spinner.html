@@ -8,16 +8,15 @@
   :root { --size: 320px; }
   html,body { margin:0; padding:0; background:transparent; font-family: Georgia, serif; color:#111; }
   .wrap { max-width: var(--size); margin: 0 auto; text-align:center; }
-  h2 { font-weight:700; font-size:20px; margin:12px 0; }
   #stage { position:relative; width:var(--size); height:var(--size); margin: 8px auto 12px; }
   #wheel { width:100%; height:100%; display:block; }
 
-  /* ▼ Pointer pointing DOWN */
+  /* ▶ Pointer pointing LEFT (placed at right side 3:00) */
   .pointer{
-    position:absolute; top:-10px; left:50%; transform:translateX(-50%);
+    position:absolute; top:50%; left:100%; transform:translate(-50%,-50%) rotate(-90deg);
     width:0; height:0;
-    border-left:10px solid transparent; border-right:10px solid transparent;
-    border-top:18px solid #111; /* downwards */
+    border-top:10px solid transparent; border-bottom:10px solid transparent;
+    border-left:18px solid #111; /* arrow pointing left */
   }
 
   button{
@@ -32,7 +31,6 @@
 </head>
 <body>
   <div class="wrap">
-    <h2>🎩 Magic Quote Spinner</h2>
     <div id="stage">
       <div class="pointer" aria-hidden="true"></div>
       <canvas id="wheel" width="320" height="320"></canvas>
@@ -141,7 +139,6 @@ function spin(){
       requestAnimationFrame(animate);
     }else{
       baseDeg = (baseDeg + extra) % 360;
-      // compute winner, then smooth snap so it lands centered on top
       const { index, degPer } = currentWinner();
       smoothSnapToSlice(index, degPer, () => {
         highlightResult(index);
@@ -153,29 +150,28 @@ function spin(){
   })(start);
 }
 
-/* Determine which slice is under the pointer right now */
+/* Winner calc: pointer at 3:00 */
 function currentWinner(){
   const degPer = 360 / N;
-  const rot = ((baseDeg % 360) + 360) % 360;      // 0..359
-  const opposite = (360 - rot) % 360;             // angle under pointer
+  const rot = ((baseDeg % 360) + 360) % 360;
+  const opposite = (90 - rot + 360) % 360;   // pointer at 90° (3:00)
   const index = Math.floor((opposite + degPer/2) / degPer) % N;
   return { index, degPer };
 }
 
-/* Smoothly rotate so the chosen slice center sits at 0° (top) */
+/* Smooth snap */
 function smoothSnapToSlice(index, degPer, onDone){
-  // target angle where slice center is at top
-  const targetDeg = (360 - (index*degPer + degPer/2)) % 360;
+  const targetDeg = (90 - (index*degPer + degPer/2) + 360) % 360;
   let delta = (targetDeg - baseDeg) % 360;
   if(delta < -180) delta += 360;
   if(delta > 180)  delta -= 360;
 
   const start = performance.now();
-  const dur = 320; // short, snappy finish
+  const dur = 320;
 
   (function snapStep(t){
     const p = Math.min(1, (t - start) / dur);
-    const ease = 1 - Math.pow(1 - p, 2);  // easeOutQuad
+    const ease = 1 - Math.pow(1 - p, 2);
     const added = delta * ease;
     drawWheel(((baseDeg + added) * Math.PI/180));
     if(p < 1){
