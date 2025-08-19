@@ -6,20 +6,10 @@
 <title>Magic Quote Spinner</title>
 <style>
   :root { --size: 320px; }
-  html,body { margin:0; padding:0; background:transparent; font-family: Georgia, serif; color:#111; }
+  html,body { margin:0; padding:0; background:transparent; font-family: Arial, sans-serif; color:#111; }
   .wrap { max-width: var(--size); margin: 0 auto; text-align:center; }
   #stage { position:relative; width:var(--size); height:var(--size); margin: 8px auto 12px; }
   #wheel { width:100%; height:100%; display:block; }
-
-  /* ▶ Pointer at RIGHT (3:00), pointing LEFT (toward wheel) */
-  .pointer{
-    position:absolute; top:50%; left:100%;
-    transform: translate(-100%,-50%); /* sit on the rim */
-    width:0; height:0;
-    border-top:10px solid transparent;
-    border-bottom:10px solid transparent;
-    border-left:18px solid #111; /* triangle points LEFT */
-  }
 
   button{
     padding:10px 18px; font-size:16px; border-radius:10px; cursor:pointer;
@@ -34,7 +24,6 @@
 <body>
   <div class="wrap">
     <div id="stage">
-      <div class="pointer" aria-hidden="true"></div>
       <canvas id="wheel" width="320" height="320"></canvas>
     </div>
     <button id="spinBtn">Spin the Wheel!</button>
@@ -90,7 +79,7 @@ const ctx = canvas.getContext("2d");
 const size = canvas.width, r = size/2;
 const N = QUOTES.length, SEG = (2*Math.PI)/N;
 
-let baseDeg = 0;          // total rotation in degrees
+let baseDeg = 0;
 let spinning = false;
 let highlightIdx = null;
 
@@ -115,8 +104,8 @@ function drawWheel(rotRad=0){
     ctx.translate(r,r);
     ctx.rotate(start + SEG/2);
     ctx.textAlign = "right";
-    ctx.fillStyle = "#111";
-    ctx.font = "bold 13px Georgia";
+    ctx.fillStyle = "white";     // white text
+    ctx.font = "bold 13px Arial, sans-serif";  // sans serif font
     ctx.fillText(QUOTES[i].who, r-12, 4);
     ctx.restore();
   }
@@ -128,21 +117,21 @@ function spin(){
   document.getElementById("quote").textContent = "";
   spinning = true;
 
-  const extra = 720 + Math.random()*540;  // 2–3.5 turns
+  const extra = 720 + Math.random()*540;
   const start = performance.now();
   const dur = 2400;
 
   (function animate(t){
     const p = Math.min(1, (t - start) / dur);
-    const ease = 1 - Math.pow(1 - p, 3);   // easeOutCubic
+    const ease = 1 - Math.pow(1 - p, 3);
     const deg = extra * ease;
     drawWheel(((baseDeg + deg) * Math.PI/180));
     if(p < 1){
       requestAnimationFrame(animate);
     }else{
       baseDeg = (baseDeg + extra) % 360;
-      const { index, degPer } = currentWinner();           // winner for pointer at 3:00
-      smoothSnapToSlice(index, degPer, () => {             // snap winner to 3:00
+      const { index, degPer } = currentWinner();
+      smoothSnapToSlice(index, degPer, () => {
         highlightResult(index);
         const { who, text } = QUOTES[index];
         setTimeout(()=>{ document.getElementById("quote").textContent = `“${text}” — ${who}`; }, 120);
@@ -152,19 +141,19 @@ function spin(){
   })(start);
 }
 
-/* Winner calc with pointer at 3:00 (0°) */
+/* Winner calc for pointer at 3:00 */
 function currentWinner(){
   const degPer = 360 / N;
-  const rot = ((baseDeg % 360) + 360) % 360;   // wheel rotation
-  const underPointer = (360 - rot) % 360;      // angle centered at 3:00
+  const rot = ((baseDeg % 360) + 360) % 360;
+  const underPointer = (360 - rot) % 360;
   const index = Math.floor((underPointer + degPer/2) / degPer) % N;
   return { index, degPer };
 }
 
-/* Smooth snap so slice center sits exactly at 3:00 (0°) */
+/* Smooth snap to align winner at 3:00 */
 function smoothSnapToSlice(index, degPer, onDone){
   const center = index*degPer + degPer/2;
-  const targetDeg = (360 - center) % 360;      // align center to 0°
+  const targetDeg = (360 - center) % 360;
   let delta = (targetDeg - baseDeg) % 360;
   if(delta < -180) delta += 360;
   if(delta > 180)  delta -= 360;
@@ -174,7 +163,7 @@ function smoothSnapToSlice(index, degPer, onDone){
 
   (function snapStep(t){
     const p = Math.min(1, (t - start) / dur);
-    const ease = 1 - Math.pow(1 - p, 2);      // easeOutQuad
+    const ease = 1 - Math.pow(1 - p, 2);
     const added = delta * ease;
     drawWheel(((baseDeg + added) * Math.PI/180));
     if(p < 1){
