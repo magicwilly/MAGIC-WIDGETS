@@ -11,6 +11,17 @@
   #stage { position:relative; width:var(--size); height:var(--size); margin: 8px auto 12px; }
   #wheel { width:100%; height:100%; display:block; }
 
+  /* ▶ Pointer at 3:00, magenta, pointing LEFT */
+  .pointer{
+    position:absolute;
+    top:50%; left:100%;
+    transform: translate(-20%,-50%); /* push slightly outside circle */
+    width:0; height:0;
+    border-top:16px solid transparent;
+    border-bottom:16px solid transparent;
+    border-left:24px solid #BE5F93; /* theme color pointer */
+  }
+
   button{
     padding:10px 18px; font-size:16px; border-radius:10px; cursor:pointer;
     background:#BE5F93; color:#fff; border:2px solid #a44d7b;
@@ -24,6 +35,7 @@
 <body>
   <div class="wrap">
     <div id="stage">
+      <div class="pointer" aria-hidden="true"></div>
       <canvas id="wheel" width="320" height="320"></canvas>
     </div>
     <button id="spinBtn">Spin the Wheel!</button>
@@ -104,8 +116,8 @@ function drawWheel(rotRad=0){
     ctx.translate(r,r);
     ctx.rotate(start + SEG/2);
     ctx.textAlign = "right";
-    ctx.fillStyle = "white";     // white text
-    ctx.font = "bold 13px Arial, sans-serif";  // sans serif font
+    ctx.fillStyle = "white";     
+    ctx.font = "bold 13px Arial, sans-serif";  
     ctx.fillText(QUOTES[i].who, r-12, 4);
     ctx.restore();
   }
