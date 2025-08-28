@@ -135,7 +135,7 @@ const AuthModal = ({ children, defaultTab = 'login' }) => {
         <DialogHeader>
           <DialogTitle className="flex items-center justify-center text-[#BE5F93]">
             <Sparkles className="h-5 w-5 mr-2" />
-            Welcome to Fund<span className="text-[#BE5F93]">Magic</span>
+            Welcome to <span className="text-[#BE5F93]">i</span>Fund<span className="text-[#BE5F93]">Magic</span>
           </DialogTitle>
         </DialogHeader>
 
