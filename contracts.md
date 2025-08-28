@@ -1,7 +1,7 @@
-# FundCraft - Kickstarter Clone API Contracts
+# FundMagic by Sleight School - Magic Crowdfunding Platform API Contracts
 
 ## Overview
-This document defines the API contracts and integration plan for converting the current frontend-only Kickstarter clone into a full-stack application.
+This document defines the API contracts and integration plan for converting the current frontend-only FundMagic platform into a full-stack magical crowdfunding application specializing in magic-related projects.
 
 ## Current Mock Data Location
 - **File**: `/app/frontend/src/data/mockData.js`
