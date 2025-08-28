@@ -57,14 +57,26 @@ const Profile = () => {
   const loadUserData = async () => {
     try {
       setLoading(true);
+      console.log('🔍 Profile: Starting to load user data...');
+      console.log('🔍 Profile: Current user:', user);
+      console.log('🔍 Profile: Auth token:', localStorage.getItem('access_token') ? 'Present' : 'Missing');
+      
       const [backed, created] = await Promise.all([
         userAPI.getBackedProjects(),
         userAPI.getCreatedProjects()
       ]);
-      setBackedProjects(backed);
-      setCreatedProjects(created);
+      
+      console.log('🔍 Profile: Backed projects response:', backed);
+      console.log('🔍 Profile: Created projects response:', created);
+      console.log('🔍 Profile: Backed projects count:', backed?.length || 0);
+      console.log('🔍 Profile: Created projects count:', created?.length || 0);
+      
+      setBackedProjects(backed || []);
+      setCreatedProjects(created || []);
     } catch (error) {
-      console.error('Error loading user data:', error);
+      console.error('❌ Profile: Error loading user data:', error);
+      console.error('❌ Profile: Error response:', error.response?.data);
+      console.error('❌ Profile: Error status:', error.response?.status);
       toast({
         title: "Error",
         description: "Failed to load profile data",
@@ -72,6 +84,7 @@ const Profile = () => {
       });
     } finally {
       setLoading(false);
+      console.log('🔍 Profile: Finished loading user data');
     }
   };
 
