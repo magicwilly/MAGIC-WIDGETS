@@ -184,7 +184,9 @@ async def update_project(
     days_left = max(0, (updated_project["end_date"] - datetime.utcnow()).days)
     funding_percentage = (updated_project["current_funding"] / updated_project["funding_goal"]) * 100
     
-    return ProjectResponse(**updated_project, days_left=days_left, funding_percentage=funding_percentage)
+    updated_project["days_left"] = days_left
+    updated_project["funding_percentage"] = funding_percentage
+    return ProjectResponse(**updated_project)
 
 @router.delete("/{project_id}")
 async def delete_project(
@@ -262,7 +264,9 @@ async def create_project_update(
     days_left = max(0, (updated_project["end_date"] - datetime.utcnow()).days)
     funding_percentage = (updated_project["current_funding"] / updated_project["funding_goal"]) * 100
     
-    return ProjectResponse(**updated_project, days_left=days_left, funding_percentage=funding_percentage)
+    updated_project["days_left"] = days_left
+    updated_project["funding_percentage"] = funding_percentage
+    return ProjectResponse(**updated_project)
 
 @router.post("/{project_id}/comments", response_model=ProjectResponse)
 async def create_comment(
@@ -297,4 +301,6 @@ async def create_comment(
     days_left = max(0, (updated_project["end_date"] - datetime.utcnow()).days)
     funding_percentage = (updated_project["current_funding"] / updated_project["funding_goal"]) * 100
     
-    return ProjectResponse(**updated_project, days_left=days_left, funding_percentage=funding_percentage)
+    updated_project["days_left"] = days_left
+    updated_project["funding_percentage"] = funding_percentage
+    return ProjectResponse(**updated_project)
