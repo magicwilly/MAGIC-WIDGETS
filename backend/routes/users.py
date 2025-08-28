@@ -80,7 +80,11 @@ async def get_created_projects(current_user: UserResponse = Depends(get_current_
         # Calculate funding percentage
         funding_percentage = (project["current_funding"] / project["funding_goal"]) * 100 if project["funding_goal"] > 0 else 0
         
-        project_response = ProjectResponse(**project, days_left=days_left, funding_percentage=funding_percentage)
+        # Update project data with calculated values
+        project["days_left"] = days_left
+        project["funding_percentage"] = funding_percentage
+        
+        project_response = ProjectResponse(**project)
         project_responses.append(project_response)
     
     return project_responses
