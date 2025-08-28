@@ -163,14 +163,18 @@ const Header = () => {
               {/* Mobile Navigation - Removed to clean up header */}
 
               {/* Mobile User Actions */}
-              {!isLoggedIn && (
+              {!isAuthenticated && (
                 <div className="flex flex-col space-y-2 px-2">
-                  <Button variant="ghost" onClick={() => setIsLoggedIn(true)}>
-                    Log In
-                  </Button>
-                  <Button className="bg-[#BE5F93] hover:bg-[#a04d7d] text-white">
-                    Sign Up
-                  </Button>
+                  <AuthModal defaultTab="login">
+                    <Button variant="ghost" className="w-full">
+                      Log In
+                    </Button>
+                  </AuthModal>
+                  <AuthModal defaultTab="register">
+                    <Button className="bg-[#BE5F93] hover:bg-[#a04d7d] text-white w-full">
+                      Sign Up
+                    </Button>
+                  </AuthModal>
                 </div>
               )}
             </div>
