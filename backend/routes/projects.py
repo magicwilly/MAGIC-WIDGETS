@@ -141,7 +141,12 @@ async def create_project(
     # Calculate funding percentage
     funding_percentage = 0.0
     
-    return ProjectResponse(**project.dict(), days_left=project_data.days_duration, funding_percentage=funding_percentage)
+    # Create project dict with calculated values
+    project_dict = project.dict()
+    project_dict["days_left"] = project_data.days_duration
+    project_dict["funding_percentage"] = funding_percentage
+    
+    return ProjectResponse(**project_dict)
 
 @router.put("/{project_id}", response_model=ProjectResponse)
 async def update_project(
