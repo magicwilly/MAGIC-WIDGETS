@@ -68,9 +68,9 @@ logger = logging.getLogger(__name__)
 @app.on_event("startup")
 async def startup_event():
     """Initialize database collections and data"""
-    logger.info("🎩 Starting FundMagic API...")
+    logger.info("🎩 Starting iFundMagic API...")
     await init_categories()
-    logger.info("✨ FundMagic API started successfully!")
+    logger.info("✨ iFundMagic API started successfully!")
 
 # Shutdown event  
 @app.on_event("shutdown")
