@@ -1,0 +1,193 @@
+[
+  {
+    "test": "Root Endpoint",
+    "status": "\u2705 PASS",
+    "message": "API root accessible",
+    "details": null,
+    "timestamp": "2025-08-28T21:15:11.676909"
+  },
+  {
+    "test": "Health Check",
+    "status": "\u2705 PASS",
+    "message": "API is healthy",
+    "details": null,
+    "timestamp": "2025-08-28T21:15:11.733023"
+  },
+  {
+    "test": "User Registration",
+    "status": "\u2705 PASS",
+    "message": "User registered successfully",
+    "details": null,
+    "timestamp": "2025-08-28T21:15:12.024466"
+  },
+  {
+    "test": "Registration Data Validation",
+    "status": "\u2705 PASS",
+    "message": "User data correct",
+    "details": null,
+    "timestamp": "2025-08-28T21:15:12.024507"
+  },
+  {
+    "test": "Duplicate Registration Prevention",
+    "status": "\u274c FAIL",
+    "message": "Should have failed with 400",
+    "details": "Status: No response",
+    "timestamp": "2025-08-28T21:15:12.083987"
+  },
+  {
+    "test": "User Login",
+    "status": "\u2705 PASS",
+    "message": "Login successful",
+    "details": null,
+    "timestamp": "2025-08-28T21:15:12.380795"
+  },
+  {
+    "test": "Invalid Login Prevention",
+    "status": "\u274c FAIL",
+    "message": "Should have failed with 401",
+    "details": "Status: No response",
+    "timestamp": "2025-08-28T21:15:12.699997"
+  },
+  {
+    "test": "Get Profile",
+    "status": "\u2705 PASS",
+    "message": "Profile retrieved successfully",
+    "details": null,
+    "timestamp": "2025-08-28T21:15:12.752203"
+  },
+  {
+    "test": "Update Profile",
+    "status": "\u2705 PASS",
+    "message": "Profile updated successfully",
+    "details": null,
+    "timestamp": "2025-08-28T21:15:12.808484"
+  },
+  {
+    "test": "Categories Retrieval",
+    "status": "\u274c FAIL",
+    "message": "Missing expected categories",
+    "details": [
+      "illusion",
+      "closeup",
+      "mentalism",
+      "props",
+      "education",
+      "digital",
+      "comedy",
+      "events"
+    ],
+    "timestamp": "2025-08-28T21:15:12.867723"
+  },
+  {
+    "test": "Project Creation",
+    "status": "\u274c FAIL",
+    "message": "Failed to create project",
+    "details": "No response",
+    "timestamp": "2025-08-28T21:15:12.936742"
+  },
+  {
+    "test": "Get All Projects",
+    "status": "\u274c FAIL",
+    "message": "Failed to get projects",
+    "details": "Status: No response",
+    "timestamp": "2025-08-28T21:15:12.988187"
+  },
+  {
+    "test": "Category Filtering",
+    "status": "\u274c FAIL",
+    "message": "Category filtering failed",
+    "details": "Status: No response",
+    "timestamp": "2025-08-28T21:15:13.045694"
+  },
+  {
+    "test": "Search Functionality",
+    "status": "\u274c FAIL",
+    "message": "Search failed",
+    "details": "Status: No response",
+    "timestamp": "2025-08-28T21:15:13.097003"
+  },
+  {
+    "test": "Individual Project Test",
+    "status": "\u274c FAIL",
+    "message": "No project ID available",
+    "details": null,
+    "timestamp": "2025-08-28T21:15:13.098578"
+  },
+  {
+    "test": "Project Updates Test",
+    "status": "\u274c FAIL",
+    "message": "No project ID available",
+    "details": null,
+    "timestamp": "2025-08-28T21:15:13.098596"
+  },
+  {
+    "test": "Backing System Test",
+    "status": "\u274c FAIL",
+    "message": "No project ID available",
+    "details": null,
+    "timestamp": "2025-08-28T21:15:13.098607"
+  },
+  {
+    "test": "Avatar Upload",
+    "status": "\u2705 PASS",
+    "message": "Avatar uploaded successfully",
+    "details": null,
+    "timestamp": "2025-08-28T21:15:13.178796"
+  },
+  {
+    "test": "Avatar Serving",
+    "status": "\u2705 PASS",
+    "message": "Avatar served successfully",
+    "details": null,
+    "timestamp": "2025-08-28T21:15:13.229751"
+  },
+  {
+    "test": "File Size Validation",
+    "status": "\u274c FAIL",
+    "message": "Large file should have been rejected",
+    "details": "Status: 200",
+    "timestamp": "2025-08-28T21:15:13.457322"
+  },
+  {
+    "test": "Unauthorized Access Prevention",
+    "status": "\u274c FAIL",
+    "message": "Should have been blocked",
+    "details": "Status: No response",
+    "timestamp": "2025-08-28T21:15:13.510895"
+  },
+  {
+    "test": "Invalid Token Prevention",
+    "status": "\u274c FAIL",
+    "message": "Invalid token should be rejected",
+    "details": "Status: No response",
+    "timestamp": "2025-08-28T21:15:13.557579"
+  },
+  {
+    "test": "Non-existent Resource",
+    "status": "\u274c FAIL",
+    "message": "Should return 404",
+    "details": "Status: No response",
+    "timestamp": "2025-08-28T21:15:13.608864"
+  },
+  {
+    "test": "Invalid Endpoint",
+    "status": "\u274c FAIL",
+    "message": "Should return 404 for invalid endpoint",
+    "details": "Status: No response",
+    "timestamp": "2025-08-28T21:15:13.657904"
+  },
+  {
+    "test": "Invalid Data Validation",
+    "status": "\u274c FAIL",
+    "message": "Should return 422 for invalid data",
+    "details": "Status: No response",
+    "timestamp": "2025-08-28T21:15:13.712839"
+  },
+  {
+    "test": "User-Project Relationship",
+    "status": "\u274c FAIL",
+    "message": "Failed to get created projects",
+    "details": null,
+    "timestamp": "2025-08-28T21:15:13.763846"
+  }
+]
