@@ -5,8 +5,6 @@ export const categories = [
   { id: 'mentalism', name: 'Mentalism', icon: '🧠' },
   { id: 'books', name: 'Magic Books', icon: '📖' },
   { id: 'cards', name: 'Playing Cards', icon: '🂠' },
-  { id: 'education', name: 'Magic Education', icon: '📚' },
-  { id: 'digital', name: 'Digital & Tech Magic', icon: '💻' },
   { id: 'events', name: 'Magic Events & Shows', icon: '🎪' }
 ];
 
