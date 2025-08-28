@@ -58,7 +58,7 @@ const Header = () => {
 
           {/* User Actions */}
           <div className="flex items-center space-x-4">
-            {isLoggedIn ? (
+            {isAuthenticated && user ? (
               <>
                 <Button
                   variant="default"
@@ -76,15 +76,17 @@ const Header = () => {
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" size="sm" className="relative">
                       <Avatar className="h-8 w-8">
-                        <AvatarImage src={mockUser.avatar} alt={mockUser.name} />
-                        <AvatarFallback>{mockUser.name.charAt(0)}</AvatarFallback>
+                        <AvatarImage src={user.avatar} alt={user.name} />
+                        <AvatarFallback className="bg-[#BE5F93]/10 text-[#BE5F93]">
+                          {user.name?.charAt(0) || 'M'}
+                        </AvatarFallback>
                       </Avatar>
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-56">
                     <div className="px-3 py-2">
-                      <p className="text-sm font-medium">{mockUser.name}</p>
-                      <p className="text-xs text-gray-500">{mockUser.email}</p>
+                      <p className="text-sm font-medium">{user.name}</p>
+                      <p className="text-xs text-gray-500">{user.email}</p>
                     </div>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem asChild>
@@ -106,7 +108,7 @@ const Header = () => {
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={() => setIsLoggedIn(false)}>
+                    <DropdownMenuItem onClick={logout}>
                       <LogOut className="h-4 w-4 mr-2" />
                       Sign Out
                     </DropdownMenuItem>
@@ -115,12 +117,16 @@ const Header = () => {
               </>
             ) : (
               <div className="hidden md:flex items-center space-x-3">
-                <Button variant="ghost" size="sm" onClick={() => setIsLoggedIn(true)}>
-                  Log In
-                </Button>
-                <Button size="sm" className="bg-[#BE5F93] hover:bg-[#a04d7d] text-white">
-                  Sign Up
-                </Button>
+                <AuthModal defaultTab="login">
+                  <Button variant="ghost" size="sm">
+                    Log In
+                  </Button>
+                </AuthModal>
+                <AuthModal defaultTab="register">
+                  <Button size="sm" className="bg-[#BE5F93] hover:bg-[#a04d7d] text-white">
+                    Sign Up
+                  </Button>
+                </AuthModal>
               </div>
             )}
 
