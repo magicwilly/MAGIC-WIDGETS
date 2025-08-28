@@ -138,17 +138,49 @@ const ProjectDetail = () => {
             {/* Project Media */}
             <Card className="mb-6 overflow-hidden border-0 shadow-sm">
               <div className="relative">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-64 md:h-96 object-cover"
-                />
-                <Button
-                  size="lg"
-                  className="absolute inset-0 m-auto w-16 h-16 rounded-full bg-[#BE5F93]/90 hover:bg-[#BE5F93] text-white shadow-lg"
-                >
-                  <Play className="h-6 w-6 ml-1" />
-                </Button>
+                {showVideo && project.video ? (
+                  <div className="relative w-full h-64 md:h-96">
+                    <iframe
+                      src={project.video.includes('youtube.com/watch') || project.video.includes('youtu.be/') 
+                        ? `https://www.youtube.com/embed/${
+                            project.video.includes('youtu.be/') 
+                              ? project.video.split('youtu.be/')[1].split('?')[0]
+                              : project.video.split('v=')[1].split('&')[0]
+                          }`
+                        : project.video
+                      }
+                      className="w-full h-full"
+                      frameBorder="0"
+                      allowFullScreen
+                      title="Project Video"
+                    />
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setShowVideo(false)}
+                      className="absolute top-2 right-2 bg-white/90 hover:bg-white"
+                    >
+                      Show Image
+                    </Button>
+                  </div>
+                ) : (
+                  <>
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-64 md:h-96 object-cover"
+                    />
+                    {project.video && (
+                      <Button
+                        size="lg"
+                        onClick={handleVideoPlay}
+                        className="absolute inset-0 m-auto w-16 h-16 rounded-full bg-[#BE5F93]/90 hover:bg-[#BE5F93] text-white shadow-lg transition-all"
+                      >
+                        <Play className="h-6 w-6 ml-1" />
+                      </Button>
+                    )}
+                  </>
+                )}
               </div>
             </Card>
 
