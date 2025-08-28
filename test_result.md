@@ -424,6 +424,18 @@ frontend:
           agent: "testing"
           comment: "Minor: Error handling implemented but 404 pages may show default content rather than explicit error messages. Core functionality unaffected."
 
+  - task: "ProjectCard Component Rendering Bug"
+    implemented: true
+    working: false
+    file: "frontend/src/components/ProjectCard.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: false
+          agent: "testing"
+          comment: "❌ CRITICAL BUG: ProjectCard component has JavaScript error 'Cannot read properties of undefined (reading 'toLocaleString')' that prevents created projects from displaying on profile page. End-to-end testing confirmed: 1) Project creation works ✅ 2) Backend APIs return project data ✅ 3) Profile component receives data ✅ 4) ProjectCard fails to render due to undefined property ❌. This is the root cause of the reported issue where created projects don't appear in user profiles. The complete project creation flow works except for this final display step."
+
 metadata:
   created_by: "testing_agent"
   version: "2.0"
