@@ -6,7 +6,6 @@ export const categories = [
   { id: 'props', name: 'Magic Props & Apparatus', icon: '🪄' },
   { id: 'education', name: 'Magic Education', icon: '📚' },
   { id: 'digital', name: 'Digital & Tech Magic', icon: '💻' },
-  { id: 'comedy', name: 'Comedy Magic', icon: '🎭' },
   { id: 'events', name: 'Magic Events & Shows', icon: '🎪' }
 ];
 
