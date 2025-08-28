@@ -206,7 +206,7 @@ const Home = () => {
       <section className="py-20 bg-gradient-to-r from-[#BE5F93] to-[#d478a8] text-white">
         <div className="container mx-auto px-4 text-center">
           <Sparkles className="h-12 w-12 mx-auto mb-4 opacity-90" />
-          <h2 className="text-4xl font-bold mb-4">Ready to Create <span className="text-[#BE5F93]">Magic</span>?</h2>
+          <h2 className="text-4xl font-bold mb-4">Ready to Create <span className="text-white">Magic</span>?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
             Join thousands of magicians who have successfully funded their dreams through FundMagic by Sleight School.
           </p>
