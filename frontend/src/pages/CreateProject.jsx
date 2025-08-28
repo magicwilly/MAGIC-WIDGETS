@@ -430,7 +430,7 @@ const CreateProject = () => {
               </Button>
             )}
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );
