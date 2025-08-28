@@ -11,10 +11,10 @@ from datetime import datetime, timedelta
 
 # Configuration
 BACKEND_URL = "https://ifundmagic.preview.emergentagent.com/api"
-TEST_USER_EMAIL = "projectcreator@ifundmagic.com"
-TEST_USER_PASSWORD = "MagicCreator123!"
-TEST_USER_NAME = "Project Creator"
-TEST_USER_LOCATION = "Magic City, CA"
+TEST_USER_EMAIL = "magician@sleightschool.com"
+TEST_USER_PASSWORD = "MagicPassword123!"
+TEST_USER_NAME = "Master Magician"
+TEST_USER_LOCATION = "Los Angeles, CA"
 
 class UserProfileTester:
     def __init__(self):
