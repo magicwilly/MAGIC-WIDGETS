@@ -3,7 +3,7 @@ export const categories = [
   { id: 'illusion', name: 'Illusion & Stage Magic', icon: '🎩' },
   { id: 'closeup', name: 'Close-up Magic', icon: '🃏' },
   { id: 'mentalism', name: 'Mentalism', icon: '🧠' },
-  { id: 'props', name: 'Magic Props & Apparatus', icon: '🪄' },
+  { id: 'books', name: 'Magic Books', icon: '📖' },
   { id: 'cards', name: 'Playing Cards', icon: '🂠' },
   { id: 'education', name: 'Magic Education', icon: '📚' },
   { id: 'digital', name: 'Digital & Tech Magic', icon: '💻' },
