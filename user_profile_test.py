@@ -72,56 +72,32 @@ class UserProfileTester:
             return None
     
     def authenticate_user(self):
-        """Register or login user for testing"""
+        """Login with existing user for testing"""
         print("\n=== User Authentication ===")
         
-        # Try to register first
-        user_data = {
-            "name": TEST_USER_NAME,
+        # Try to login with existing user
+        login_data = {
             "email": TEST_USER_EMAIL,
-            "password": TEST_USER_PASSWORD,
-            "location": TEST_USER_LOCATION
+            "password": TEST_USER_PASSWORD
         }
         
-        response = self.make_request("POST", "/auth/register", user_data)
+        response = self.make_request("POST", "/auth/login", login_data)
         
         if response and response.status_code == 200:
             data = response.json()
             self.access_token = data["access_token"]
             self.user_id = data["user"]["id"]
-            self.log_result("User Registration", True, "New user registered successfully")
+            self.log_result("User Login", True, "User logged in successfully")
+            print(f"   User ID: {self.user_id}")
+            print(f"   User Name: {data['user']['name']}")
+            print(f"   Existing created projects: {len(data['user'].get('created_projects', []))}")
             return True
-        elif response and response.status_code == 400:
-            # User already exists, try login
-            try:
-                error_data = response.json()
-                print(f"Registration failed with 400: {error_data}")
-            except:
-                print(f"Registration failed with 400: {response.text}")
-            
-            login_data = {
-                "email": TEST_USER_EMAIL,
-                "password": TEST_USER_PASSWORD
-            }
-            
-            response = self.make_request("POST", "/auth/login", login_data)
-            
-            if response and response.status_code == 200:
-                data = response.json()
-                self.access_token = data["access_token"]
-                self.user_id = data["user"]["id"]
-                self.log_result("User Login", True, "Existing user logged in successfully")
-                return True
-            else:
-                self.log_result("User Authentication", False, "Failed to login existing user", 
-                              response.json() if response else "No response")
-                return False
         else:
             try:
                 error_data = response.json() if response else "No response"
             except:
                 error_data = response.text if response else "No response"
-            self.log_result("User Authentication", False, "Failed to register or login", error_data)
+            self.log_result("User Authentication", False, "Failed to login", error_data)
             return False
     
     def test_user_profile_endpoint(self):
