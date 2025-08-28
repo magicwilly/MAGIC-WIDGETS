@@ -54,7 +54,7 @@ async def init_categories():
             {"id": "illusion", "name": "Illusion & Stage Magic", "icon": "🎩", "description": "Grand illusions and stage performances"},
             {"id": "closeup", "name": "Close-up Magic", "icon": "🃏", "description": "Intimate magic performed up close"},
             {"id": "mentalism", "name": "Mentalism", "icon": "🧠", "description": "Mind reading and psychological magic"},
-            {"id": "props", "name": "Magic Props & Apparatus", "icon": "🪄", "description": "Magical devices and apparatus"},
+            {"id": "books", "name": "Magic Books", "icon": "📖", "description": "Magic books, manuscripts, and written knowledge"},
             {"id": "cards", "name": "Playing Cards", "icon": "🂠", "description": "Custom playing cards and card magic innovations"},
             {"id": "education", "name": "Magic Education", "icon": "📚", "description": "Teaching and learning magic"},
             {"id": "digital", "name": "Digital & Tech Magic", "icon": "💻", "description": "Technology-enhanced magic"},
