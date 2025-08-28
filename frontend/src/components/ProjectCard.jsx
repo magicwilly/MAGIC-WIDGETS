@@ -55,7 +55,7 @@ const ProjectCard = ({ project, size = 'default' }) => {
           <div className="flex items-center text-xs text-gray-500 space-x-4">
             <span className="flex items-center">
               <Users className="h-3 w-3 mr-1" />
-              by {project.creator}
+              by {creator}
             </span>
             {project.location && (
               <span className="flex items-center">
@@ -68,7 +68,7 @@ const ProjectCard = ({ project, size = 'default' }) => {
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
               <span className="font-medium text-gray-900">
-                ${project.currentFunding.toLocaleString()}
+                ${currentFunding.toLocaleString()}
               </span>
               <span className="text-gray-500">
                 {fundingPercentage.toFixed(0)}%
@@ -81,11 +81,11 @@ const ProjectCard = ({ project, size = 'default' }) => {
             />
             
             <div className="flex justify-between text-xs text-gray-500">
-              <span>{project.backers} backers</span>
-              {project.daysLeft !== undefined && (
+              <span>{backers} backers</span>
+              {daysLeft !== undefined && (
                 <span className="flex items-center">
                   <Calendar className="h-3 w-3 mr-1" />
-                  {project.daysLeft} days left
+                  {daysLeft} days left
                 </span>
               )}
             </div>
