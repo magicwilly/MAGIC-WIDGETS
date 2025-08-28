@@ -35,7 +35,7 @@ async def root():
 
 @api_router.get("/health")
 async def health_check():
-    return {"status": "healthy", "service": "FundMagic API"}
+    return {"status": "healthy", "service": "iFundMagic API"}
 
 # Include all routers
 api_router.include_router(auth_router)
