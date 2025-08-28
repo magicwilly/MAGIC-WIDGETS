@@ -105,6 +105,18 @@
 user_problem_statement: "Test the complete authenticated user flow for project creation to verify the bug fix - ensure projects are properly saved to backend and appear in user profile. Also implement Terms of Service and Privacy Policy pages with provided content."
 
 backend:
+  - task: "Terms of Service and Privacy Policy Pages"
+    implemented: true
+    working: "NA"
+    file: "frontend/src/pages/Terms.jsx, frontend/src/pages/Privacy.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Created Terms of Service and Privacy Policy pages with provided content. Added proper styling with brand colors, card layouts, and responsive design. Added routes to App.js for /terms and /privacy paths."
+
   - task: "Authenticated Project Creation Flow"
     implemented: true
     working: true
