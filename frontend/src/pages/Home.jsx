@@ -77,7 +77,7 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-12">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">Featured Magic Projects</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">Featured <span className="text-[#BE5F93]">Magic</span> Projects</h2>
               <p className="text-gray-600">Discover extraordinary magical innovations that need your support</p>
             </div>
             <Button variant="ghost" asChild>
