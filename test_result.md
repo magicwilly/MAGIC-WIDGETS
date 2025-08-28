@@ -249,6 +249,18 @@ backend:
           agent: "testing"
           comment: "MongoDB integration working correctly. Data persistence, relationships, and collections functioning properly."
 
+  - task: "User Profile Endpoints Investigation"
+    implemented: true
+    working: true
+    file: "backend/routes/users.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "🔍 INVESTIGATION COMPLETE: Conducted focused testing of reported issue 'created projects not showing on profile page'. ✅ ALL USER PROFILE ENDPOINTS WORKING PERFECTLY: GET /users/profile (✅), GET /users/created (✅), GET /users/backed (✅) - 100% success rate (19/19 tests). ✅ PROJECT CREATION & RETRIEVAL VERIFIED: Created 4 test projects, all immediately appeared in GET /users/created. ✅ DATA CONSISTENCY CONFIRMED: Manual filtering matches API results, creator_id set correctly, database queries working. 🎯 CONCLUSION: Backend APIs are functioning perfectly. The reported issue is NOT a backend problem - must be frontend implementation issue (API calls, response handling, authentication, or state management)."
+
   - task: "Error Handling and Validation"
     implemented: true
     working: true
