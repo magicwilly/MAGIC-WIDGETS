@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Discover from "./pages/Discover";
 import ProjectDetail from "./pages/ProjectDetail";
 import CreateProject from "./pages/CreateProject";
+import Profile from "./pages/Profile";
 import { Toaster } from "./components/ui/toaster";
 import { AuthProvider } from "./contexts/AuthContext";
 
