@@ -117,8 +117,11 @@ class UserProfileTester:
                               response.json() if response else "No response")
                 return False
         else:
-            self.log_result("User Authentication", False, "Failed to register or login", 
-                          response.json() if response else "No response")
+            try:
+                error_data = response.json() if response else "No response"
+            except:
+                error_data = response.text if response else "No response"
+            self.log_result("User Authentication", False, "Failed to register or login", error_data)
             return False
     
     def test_user_profile_endpoint(self):
