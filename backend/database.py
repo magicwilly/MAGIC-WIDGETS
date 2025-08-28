@@ -56,8 +56,6 @@ async def init_categories():
             {"id": "mentalism", "name": "Mentalism", "icon": "🧠", "description": "Mind reading and psychological magic"},
             {"id": "books", "name": "Magic Books", "icon": "📖", "description": "Magic books, manuscripts, and written knowledge"},
             {"id": "cards", "name": "Playing Cards", "icon": "🂠", "description": "Custom playing cards and card magic innovations"},
-            {"id": "education", "name": "Magic Education", "icon": "📚", "description": "Teaching and learning magic"},
-            {"id": "digital", "name": "Digital & Tech Magic", "icon": "💻", "description": "Technology-enhanced magic"},
             {"id": "events", "name": "Magic Events & Shows", "icon": "🎪", "description": "Magic shows and events"}
         ]
         await categories_collection.insert_many(categories)
