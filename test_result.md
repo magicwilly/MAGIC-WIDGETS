@@ -105,6 +105,18 @@
 user_problem_statement: "Test the complete authenticated user flow for project creation to verify the bug fix - ensure projects are properly saved to backend and appear in user profile. Also implement Terms of Service and Privacy Policy pages with provided content."
 
 backend:
+  - task: "Authenticated Project Creation Flow"
+    implemented: true
+    working: "NA"
+    file: "backend/routes/projects.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Need to verify the complete flow: user registration/login -> project creation via CreateProject.jsx -> project saved to backend -> project appears in user profile. This is the specific bug fix that was recently implemented."
+
   - task: "API Health Check"
     implemented: true
     working: true
