@@ -15,7 +15,7 @@ export const featuredProjects = [
     id: 1,
     title: "The Quantum Deck - Revolutionary Card Magic System",
     creator: "Magnus the Mystifier",
-    category: "props",
+    category: "cards",
     image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop",
     video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     description: "A groundbreaking card deck that enables impossible card tricks through innovative design and mechanics.",
