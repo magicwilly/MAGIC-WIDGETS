@@ -43,6 +43,7 @@ api_router.include_router(users_router)
 api_router.include_router(projects_router)
 api_router.include_router(categories_router)
 api_router.include_router(backing_router)
+api_router.include_router(upload_router)
 
 # Include the main router in the app
 app.include_router(api_router)
