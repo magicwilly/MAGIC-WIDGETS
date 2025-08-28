@@ -104,7 +104,7 @@ const Home = () => {
             <p className="text-gray-600">Find projects that match your magical interests</p>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {categories.map((category) => (
               <Link key={category.id} to={`/category/${category.id}`}>
                 <Card className="group hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border-0 bg-white hover:bg-gradient-to-br hover:from-white hover:to-[#BE5F93]/5">
