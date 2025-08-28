@@ -108,7 +108,7 @@ const Profile = () => {
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <Card className="w-96 text-center">
           <CardContent className="pt-6">
-            <Sparkles className="h-16 w-16 mx-auto text-[#BE5F93] mb-4" />
+            <Key className="h-16 w-16 mx-auto text-[#BE5F93] mb-4" />
             <h2 className="text-xl font-bold text-gray-900 mb-4">Please Sign In</h2>
             <p className="text-gray-600 mb-6">You need to be logged in to view your magical profile.</p>
             <Button asChild className="bg-[#BE5F93] hover:bg-[#a04d7d]">
