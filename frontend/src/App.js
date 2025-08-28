@@ -31,6 +31,7 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="/privacy" element={<Privacy />} />
+              <Route path="/cookies" element={<div className="container mx-auto px-4 py-20 text-center"><h1 className="text-2xl font-bold">Cookie Policy - Coming Soon</h1></div>} />
               <Route path="/backed" element={<div className="container mx-auto px-4 py-20 text-center"><h1 className="text-2xl font-bold">Backed Projects - Coming Soon</h1></div>} />
               <Route path="/settings" element={<div className="container mx-auto px-4 py-20 text-center"><h1 className="text-2xl font-bold">Settings - Coming Soon</h1></div>} />
               <Route path="/about" element={<div className="container mx-auto px-4 py-20 text-center"><h1 className="text-2xl font-bold">About Us - Coming Soon</h1></div>} />
