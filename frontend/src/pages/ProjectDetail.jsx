@@ -301,10 +301,10 @@ const ProjectDetail = () => {
               <CardContent className="p-6">
                 <div className="text-center mb-6">
                   <div className="text-3xl font-bold text-gray-900 mb-1">
-                    ${project.currentFunding.toLocaleString()}
+                    ${currentFunding.toLocaleString()}
                   </div>
                   <div className="text-gray-600 text-sm">
-                    pledged of ${project.fundingGoal.toLocaleString()} goal
+                    pledged of ${fundingGoal.toLocaleString()} goal
                   </div>
                 </div>
 
