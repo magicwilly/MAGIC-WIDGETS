@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Separator } from '../components/ui/separator';
-import { Plus, X, Upload, DollarSign, Calendar, Target } from 'lucide-react';
+import { Plus, X, Upload, DollarSign, Calendar, Target, Sparkles } from 'lucide-react';
 import { categories } from '../data/mockData';
 import { useToast } from '../hooks/use-toast';
 
@@ -30,9 +30,9 @@ const CreateProject = () => {
   });
 
   const steps = [
-    { number: 1, title: 'Project Basics', description: 'Tell us about your project' },
+    { number: 1, title: 'Magic Project Basics', description: 'Tell us about your magical creation' },
     { number: 2, title: 'Funding & Timeline', description: 'Set your goals and timeline' },
-    { number: 3, title: 'Rewards', description: 'Create reward tiers for backers' },
+    { number: 3, title: 'Rewards & Tiers', description: 'Create reward tiers for backers' },
     { number: 4, title: 'Media & Story', description: 'Add images and videos' }
   ];
 
@@ -80,8 +80,8 @@ const CreateProject = () => {
     e.preventDefault();
     // Mock project creation
     toast({
-      title: "Project Created Successfully!",
-      description: "Your project has been submitted for review.",
+      title: "🎩 Magic Project Created Successfully!",
+      description: "Your magical project has been submitted for review.",
     });
     setTimeout(() => navigate('/'), 2000);
   };
@@ -97,21 +97,30 @@ const CreateProject = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-8">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <div className="flex items-center justify-center mb-4">
+            <Sparkles className="h-8 w-8 text-[#BE5F93] mr-3" />
+            <h1 className="text-4xl font-bold text-gray-900">Create Your Magic Project</h1>
+          </div>
+          <p className="text-gray-600">Share your magical innovation with the world</p>
+        </div>
+
         {/* Progress Steps */}
         <div className="mb-8">
           <div className="flex items-center justify-between max-w-4xl mx-auto">
             {steps.map((step, index) => (
               <div key={step.number} className="flex items-center">
                 <div className={`flex items-center ${index !== 0 ? 'ml-4' : ''}`}>
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium ${
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium transition-colors ${
                     currentStep >= step.number
-                      ? 'bg-emerald-500 text-white'
+                      ? 'bg-[#BE5F93] text-white'
                       : 'bg-gray-200 text-gray-600'
                   }`}>
                     {step.number}
                   </div>
                   <div className="ml-3 hidden md:block">
-                    <div className={`text-sm font-medium ${
+                    <div className={`text-sm font-medium transition-colors ${
                       currentStep >= step.number ? 'text-gray-900' : 'text-gray-500'
                     }`}>
                       {step.title}
@@ -120,8 +129,8 @@ const CreateProject = () => {
                   </div>
                 </div>
                 {index < steps.length - 1 && (
-                  <div className={`flex-1 h-px mx-4 ${
-                    currentStep > step.number ? 'bg-emerald-500' : 'bg-gray-200'
+                  <div className={`flex-1 h-px mx-4 transition-colors ${
+                    currentStep > step.number ? 'bg-[#BE5F93]' : 'bg-gray-200'
                   }`} />
                 )}
               </div>
@@ -135,8 +144,8 @@ const CreateProject = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <Target className="h-5 w-5 mr-2" />
-                  Project Basics
+                  <Target className="h-5 w-5 mr-2 text-[#BE5F93]" />
+                  Magic Project Basics
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -144,10 +153,10 @@ const CreateProject = () => {
                   <Label htmlFor="title">Project Title *</Label>
                   <Input
                     id="title"
-                    placeholder="Give your project a clear, memorable title"
+                    placeholder="Give your magical project a captivating title"
                     value={formData.title}
                     onChange={(e) => handleInputChange('title', e.target.value)}
-                    className="mt-2"
+                    className="mt-2 focus:ring-[#BE5F93] focus:border-[#BE5F93]"
                   />
                 </div>
 
@@ -155,23 +164,23 @@ const CreateProject = () => {
                   <Label htmlFor="subtitle">Subtitle</Label>
                   <Input
                     id="subtitle"
-                    placeholder="Briefly describe what you're creating"
+                    placeholder="Briefly describe your magical creation"
                     value={formData.subtitle}
                     onChange={(e) => handleInputChange('subtitle', e.target.value)}
-                    className="mt-2"
+                    className="mt-2 focus:ring-[#BE5F93] focus:border-[#BE5F93]"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="category">Category *</Label>
+                  <Label htmlFor="category">Magic Category *</Label>
                   <Select value={formData.category} onValueChange={(value) => handleInputChange('category', value)}>
                     <SelectTrigger className="mt-2">
-                      <SelectValue placeholder="Choose a category" />
+                      <SelectValue placeholder="Choose your magic category" />
                     </SelectTrigger>
                     <SelectContent>
                       {categories.map((category) => (
                         <SelectItem key={category.id} value={category.id}>
-                          {category.name}
+                          {category.icon} {category.name}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -185,7 +194,7 @@ const CreateProject = () => {
                     placeholder="Where are you based? (City, Country)"
                     value={formData.location}
                     onChange={(e) => handleInputChange('location', e.target.value)}
-                    className="mt-2"
+                    className="mt-2 focus:ring-[#BE5F93] focus:border-[#BE5F93]"
                   />
                 </div>
 
@@ -193,10 +202,10 @@ const CreateProject = () => {
                   <Label htmlFor="description">Project Description *</Label>
                   <Textarea
                     id="description"
-                    placeholder="Describe your project in detail. What are you creating? Why is it important?"
+                    placeholder="Describe your magical project in detail. What makes it special? Why will people love it?"
                     value={formData.description}
                     onChange={(e) => handleInputChange('description', e.target.value)}
-                    className="mt-2 h-32"
+                    className="mt-2 h-32 focus:ring-[#BE5F93] focus:border-[#BE5F93]"
                   />
                 </div>
               </CardContent>
@@ -208,7 +217,7 @@ const CreateProject = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <DollarSign className="h-5 w-5 mr-2" />
+                  <DollarSign className="h-5 w-5 mr-2 text-[#BE5F93]" />
                   Funding & Timeline
                 </CardTitle>
               </CardHeader>
@@ -221,10 +230,10 @@ const CreateProject = () => {
                     placeholder="25000"
                     value={formData.fundingGoal}
                     onChange={(e) => handleInputChange('fundingGoal', e.target.value)}
-                    className="mt-2"
+                    className="mt-2 focus:ring-[#BE5F93] focus:border-[#BE5F93]"
                   />
                   <p className="text-sm text-gray-500 mt-1">
-                    Set a realistic goal that covers your project costs and fees.
+                    Set a realistic goal that covers your project costs, production, and platform fees.
                   </p>
                 </div>
 
@@ -242,11 +251,14 @@ const CreateProject = () => {
                   </Select>
                 </div>
 
-                <div className="bg-blue-50 p-4 rounded-lg">
-                  <h4 className="font-medium text-blue-900 mb-2">Funding Model: All-or-Nothing</h4>
-                  <p className="text-sm text-blue-700">
+                <div className="bg-[#BE5F93]/5 border border-[#BE5F93]/20 p-4 rounded-lg">
+                  <h4 className="font-medium text-[#BE5F93] mb-2 flex items-center">
+                    <Sparkles className="h-4 w-4 mr-2" />
+                    All-or-Nothing Funding Model
+                  </h4>
+                  <p className="text-sm text-gray-700">
                     You'll only receive funds if you reach your full goal by the deadline. 
-                    This builds trust with backers and ensures you have enough to complete your project.
+                    This builds trust with backers and ensures you have enough to complete your magical project.
                   </p>
                 </div>
               </CardContent>
@@ -257,20 +269,24 @@ const CreateProject = () => {
           {currentStep === 3 && (
             <Card>
               <CardHeader>
-                <CardTitle>Create Reward Tiers</CardTitle>
+                <CardTitle className="flex items-center">
+                  <Sparkles className="h-5 w-5 mr-2 text-[#BE5F93]" />
+                  Create Magical Reward Tiers
+                </CardTitle>
                 <p className="text-gray-600">Offer compelling rewards to encourage backing</p>
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
                   {formData.rewards.map((reward, index) => (
-                    <div key={reward.id} className="border rounded-lg p-4">
+                    <div key={reward.id} className="border rounded-lg p-4 bg-gray-50">
                       <div className="flex justify-between items-center mb-4">
-                        <h4 className="font-medium">Reward #{index + 1}</h4>
+                        <h4 className="font-medium text-[#BE5F93]">Reward Tier #{index + 1}</h4>
                         <Button
                           type="button"
                           variant="ghost"
                           size="sm"
                           onClick={() => removeReward(reward.id)}
+                          className="hover:text-red-600"
                         >
                           <X className="h-4 w-4" />
                         </Button>
@@ -284,7 +300,7 @@ const CreateProject = () => {
                             placeholder="25"
                             value={reward.amount}
                             onChange={(e) => updateReward(reward.id, 'amount', e.target.value)}
-                            className="mt-1"
+                            className="mt-1 focus:ring-[#BE5F93] focus:border-[#BE5F93]"
                           />
                         </div>
                         
@@ -294,34 +310,39 @@ const CreateProject = () => {
                             type="month"
                             value={reward.estimated}
                             onChange={(e) => updateReward(reward.id, 'estimated', e.target.value)}
-                            className="mt-1"
+                            className="mt-1 focus:ring-[#BE5F93] focus:border-[#BE5F93]"
                           />
                         </div>
                         
                         <div className="md:col-span-2">
                           <Label>Reward Title</Label>
                           <Input
-                            placeholder="Early Bird Special"
+                            placeholder="Magic Starter Kit"
                             value={reward.title}
                             onChange={(e) => updateReward(reward.id, 'title', e.target.value)}
-                            className="mt-1"
+                            className="mt-1 focus:ring-[#BE5F93] focus:border-[#BE5F93]"
                           />
                         </div>
                         
                         <div className="md:col-span-2">
                           <Label>Description</Label>
                           <Textarea
-                            placeholder="Describe what backers will receive"
+                            placeholder="Describe what magical rewards backers will receive"
                             value={reward.description}
                             onChange={(e) => updateReward(reward.id, 'description', e.target.value)}
-                            className="mt-1"
+                            className="mt-1 focus:ring-[#BE5F93] focus:border-[#BE5F93]"
                           />
                         </div>
                       </div>
                     </div>
                   ))}
                   
-                  <Button type="button" variant="outline" onClick={addReward} className="w-full">
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    onClick={addReward} 
+                    className="w-full border-[#BE5F93]/20 hover:border-[#BE5F93]/40 hover:text-[#BE5F93]"
+                  >
                     <Plus className="h-4 w-4 mr-2" />
                     Add Reward Tier
                   </Button>
@@ -335,17 +356,17 @@ const CreateProject = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <Upload className="h-5 w-5 mr-2" />
+                  <Upload className="h-5 w-5 mr-2 text-[#BE5F93]" />
                   Media & Story
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div>
                   <Label>Project Image</Label>
-                  <div className="mt-2 border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
-                    <Upload className="h-8 w-8 mx-auto text-gray-400 mb-2" />
+                  <div className="mt-2 border-2 border-dashed border-[#BE5F93]/30 rounded-lg p-8 text-center hover:border-[#BE5F93]/50 transition-colors">
+                    <Upload className="h-8 w-8 mx-auto text-[#BE5F93] mb-2" />
                     <p className="text-gray-600 mb-2">Upload your main project image</p>
-                    <Button type="button" variant="outline" size="sm">
+                    <Button type="button" variant="outline" size="sm" className="border-[#BE5F93]/20 hover:border-[#BE5F93]/40">
                       Choose File
                     </Button>
                   </div>
@@ -358,17 +379,21 @@ const CreateProject = () => {
                     placeholder="https://youtube.com/watch?v=..."
                     value={formData.video}
                     onChange={(e) => handleInputChange('video', e.target.value)}
-                    className="mt-2"
+                    className="mt-2 focus:ring-[#BE5F93] focus:border-[#BE5F93]"
                   />
                 </div>
 
-                <div className="bg-emerald-50 p-4 rounded-lg">
-                  <h4 className="font-medium text-emerald-900 mb-2">Tips for Success</h4>
-                  <ul className="text-sm text-emerald-700 space-y-1">
-                    <li>• Use high-quality images that showcase your project</li>
-                    <li>• Create a compelling video that tells your story</li>
-                    <li>• Write a detailed project description</li>
+                <div className="bg-[#BE5F93]/5 border border-[#BE5F93]/20 p-4 rounded-lg">
+                  <h4 className="font-medium text-[#BE5F93] mb-2 flex items-center">
+                    <Sparkles className="h-4 w-4 mr-2" />
+                    Tips for Magical Success
+                  </h4>
+                  <ul className="text-sm text-gray-700 space-y-1">
+                    <li>• Use high-quality images that showcase your magic project</li>
+                    <li>• Create a compelling video that demonstrates your magic</li>
+                    <li>• Write a detailed story about your magical innovation</li>
                     <li>• Offer attractive rewards at different price points</li>
+                    <li>• Engage with the magic community during your campaign</li>
                   </ul>
                 </div>
               </CardContent>
@@ -382,17 +407,26 @@ const CreateProject = () => {
               variant="outline"
               onClick={prevStep}
               disabled={currentStep === 1}
+              className="border-[#BE5F93]/20 hover:border-[#BE5F93]/40"
             >
               Previous
             </Button>
             
             {currentStep < 4 ? (
-              <Button type="button" onClick={nextStep}>
+              <Button 
+                type="button" 
+                onClick={nextStep}
+                className="bg-[#BE5F93] hover:bg-[#a04d7d]"
+              >
                 Next
               </Button>
             ) : (
-              <Button type="submit" className="bg-gradient-to-r from-emerald-500 to-blue-600">
-                Launch Project
+              <Button 
+                type="submit" 
+                className="bg-gradient-to-r from-[#BE5F93] to-[#d478a8] hover:from-[#a04d7d] hover:to-[#BE5F93]"
+              >
+                <Sparkles className="h-4 w-4 mr-2" />
+                Launch Magic Project
               </Button>
             )}
           </div>

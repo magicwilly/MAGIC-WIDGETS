@@ -4,7 +4,7 @@ import { Input } from '../components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Badge } from '../components/ui/badge';
 import ProjectCard from '../components/ProjectCard';
-import { Search, Filter, Grid, List } from 'lucide-react';
+import { Search, Filter, Grid, List, Sparkles } from 'lucide-react';
 import { featuredProjects, categories } from '../data/mockData';
 
 const Discover = () => {
@@ -15,8 +15,8 @@ const Discover = () => {
   const [showFilters, setShowFilters] = useState(false);
 
   const sortOptions = [
-    { value: 'trending', label: 'Trending' },
-    { value: 'newest', label: 'Newest' },
+    { value: 'trending', label: 'Trending Magic' },
+    { value: 'newest', label: 'Newest Projects' },
     { value: 'ending-soon', label: 'Ending Soon' },
     { value: 'most-funded', label: 'Most Funded' },
     { value: 'recently-launched', label: 'Recently Launched' }
@@ -35,8 +35,11 @@ const Discover = () => {
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Discover Projects</h1>
-          <p className="text-gray-600">Explore amazing projects from creators around the world</p>
+          <div className="flex items-center mb-2">
+            <Sparkles className="h-8 w-8 text-[#BE5F93] mr-3" />
+            <h1 className="text-4xl font-bold text-gray-900">Discover Magic Projects</h1>
+          </div>
+          <p className="text-gray-600">Explore amazing magical projects from creators around the world</p>
         </div>
 
         {/* Search and Filters */}
@@ -47,23 +50,23 @@ const Discover = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
               <Input
                 type="text"
-                placeholder="Search projects, creators, or keywords..."
+                placeholder="Search magical projects, creators, or keywords..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
+                className="pl-10 focus:ring-[#BE5F93] focus:border-[#BE5F93]"
               />
             </div>
 
             {/* Category Filter */}
             <Select value={selectedCategory} onValueChange={setSelectedCategory}>
               <SelectTrigger className="w-full lg:w-48">
-                <SelectValue placeholder="All Categories" />
+                <SelectValue placeholder="All Magic Categories" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Categories</SelectItem>
+                <SelectItem value="all">All Magic Categories</SelectItem>
                 {categories.map((category) => (
                   <SelectItem key={category.id} value={category.id}>
-                    {category.name}
+                    {category.icon} {category.name}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -89,7 +92,7 @@ const Discover = () => {
                 variant={viewMode === 'grid' ? 'default' : 'ghost'}
                 size="sm"
                 onClick={() => setViewMode('grid')}
-                className="rounded-r-none"
+                className={`rounded-r-none ${viewMode === 'grid' ? 'bg-[#BE5F93] hover:bg-[#a04d7d]' : ''}`}
               >
                 <Grid className="h-4 w-4" />
               </Button>
@@ -97,7 +100,7 @@ const Discover = () => {
                 variant={viewMode === 'list' ? 'default' : 'ghost'}
                 size="sm"
                 onClick={() => setViewMode('list')}
-                className="rounded-l-none"
+                className={`rounded-l-none ${viewMode === 'list' ? 'bg-[#BE5F93] hover:bg-[#a04d7d]' : ''}`}
               >
                 <List className="h-4 w-4" />
               </Button>
@@ -107,7 +110,7 @@ const Discover = () => {
           {/* Active Filters */}
           <div className="flex flex-wrap gap-2">
             {searchQuery && (
-              <Badge variant="secondary" className="flex items-center">
+              <Badge variant="secondary" className="flex items-center bg-[#BE5F93]/10 text-[#BE5F93]">
                 Search: "{searchQuery}"
                 <button
                   onClick={() => setSearchQuery('')}
@@ -118,7 +121,7 @@ const Discover = () => {
               </Badge>
             )}
             {selectedCategory !== 'all' && (
-              <Badge variant="secondary" className="flex items-center">
+              <Badge variant="secondary" className="flex items-center bg-[#BE5F93]/10 text-[#BE5F93]">
                 Category: {categories.find(c => c.id === selectedCategory)?.name}
                 <button
                   onClick={() => setSelectedCategory('all')}
@@ -134,9 +137,9 @@ const Discover = () => {
         {/* Results */}
         <div className="mb-6 flex justify-between items-center">
           <p className="text-gray-600">
-            Showing {filteredProjects.length} project{filteredProjects.length !== 1 ? 's' : ''}
+            Showing {filteredProjects.length} magical project{filteredProjects.length !== 1 ? 's' : ''}
           </p>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="border-[#BE5F93]/20 hover:border-[#BE5F93]/40 hover:text-[#BE5F93]">
             <Filter className="h-4 w-4 mr-2" />
             More Filters
           </Button>
@@ -152,7 +155,7 @@ const Discover = () => {
         ) : (
           <div className="space-y-6">
             {filteredProjects.map((project) => (
-              <div key={project.id} className="bg-white rounded-lg shadow-sm border p-6 flex gap-6">
+              <div key={project.id} className="bg-white rounded-lg shadow-sm border p-6 flex gap-6 hover:shadow-md transition-shadow">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -160,10 +163,12 @@ const Discover = () => {
                 />
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
-                    <Badge variant="secondary">{project.category}</Badge>
+                    <Badge variant="secondary" className="bg-[#BE5F93]/10 text-[#BE5F93]">
+                      {categories.find(c => c.id === project.category)?.icon} {project.category}
+                    </Badge>
                     <span className="text-sm text-gray-500">by {project.creator}</span>
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{project.title}</h3>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2 hover:text-[#BE5F93] transition-colors">{project.title}</h3>
                   <p className="text-gray-600 mb-4 line-clamp-2">{project.description}</p>
                   <div className="flex items-center justify-between">
                     <div className="text-sm text-gray-500">
@@ -184,14 +189,18 @@ const Discover = () => {
         {/* Empty State */}
         {filteredProjects.length === 0 && (
           <div className="text-center py-12">
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">No projects found</h3>
+            <Sparkles className="h-16 w-16 mx-auto text-[#BE5F93]/40 mb-4" />
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">No magical projects found</h3>
             <p className="text-gray-600 mb-4">
-              Try adjusting your search criteria or browse all projects
+              Try adjusting your search criteria or browse all magical projects
             </p>
-            <Button onClick={() => {
-              setSearchQuery('');
-              setSelectedCategory('all');
-            }}>
+            <Button 
+              onClick={() => {
+                setSearchQuery('');
+                setSelectedCategory('all');
+              }}
+              className="bg-[#BE5F93] hover:bg-[#a04d7d]"
+            >
               Clear Filters
             </Button>
           </div>
@@ -200,8 +209,8 @@ const Discover = () => {
         {/* Load More */}
         {filteredProjects.length > 0 && (
           <div className="text-center mt-12">
-            <Button variant="outline" size="lg">
-              Load More Projects
+            <Button variant="outline" size="lg" className="border-[#BE5F93]/20 hover:border-[#BE5F93]/40 hover:text-[#BE5F93]">
+              Discover More Magic
             </Button>
           </div>
         )}
