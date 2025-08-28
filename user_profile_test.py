@@ -53,6 +53,7 @@ class UserProfileTester:
             default_headers.update(headers)
         
         try:
+            print(f"Making {method} request to: {url}")
             if method.upper() == "GET":
                 response = requests.get(url, headers=default_headers, timeout=30)
             elif method.upper() == "POST":
@@ -64,6 +65,7 @@ class UserProfileTester:
             else:
                 raise ValueError(f"Unsupported HTTP method: {method}")
             
+            print(f"Response status: {response.status_code}")
             return response
         except requests.exceptions.RequestException as e:
             print(f"Request error: {e}")
