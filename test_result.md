@@ -410,7 +410,9 @@ metadata:
   run_ui: true
 
 test_plan:
-  current_focus: []
+  current_focus:
+    - "Terms of Service and Privacy Policy Pages"
+    - "Authenticated Project Creation Flow"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
