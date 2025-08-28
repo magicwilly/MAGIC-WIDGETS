@@ -171,16 +171,11 @@ const Profile = () => {
                         className="focus:ring-[#BE5F93] focus:border-[#BE5F93]"
                       />
                     </div>
-                    <div>
-                      <Label htmlFor="avatar">Avatar URL</Label>
-                      <Input
-                        id="avatar"
-                        value={editForm.avatar}
-                        onChange={(e) => setEditForm({...editForm, avatar: e.target.value})}
-                        placeholder="https://example.com/avatar.jpg"
-                        className="focus:ring-[#BE5F93] focus:border-[#BE5F93]"
-                      />
-                    </div>
+                    <PhotoUpload
+                      currentAvatar={editForm.avatar || user.avatar}
+                      onUploadSuccess={(avatarUrl) => setEditForm({...editForm, avatar: avatarUrl})}
+                      userName={user.name}
+                    />
                     <div className="flex gap-2">
                       <Button 
                         onClick={handleSaveProfile}
