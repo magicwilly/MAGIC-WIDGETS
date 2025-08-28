@@ -157,11 +157,11 @@ const ProjectDetail = () => {
               <div className="flex items-center p-4 bg-white rounded-lg border">
                 <Avatar className="h-12 w-12 mr-4">
                   <AvatarImage src={`https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face`} />
-                  <AvatarFallback className="bg-[#BE5F93]/10 text-[#BE5F93]">{project.creator.charAt(0)}</AvatarFallback>
+                  <AvatarFallback className="bg-[#BE5F93]/10 text-[#BE5F93]">{creator.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <div className="flex-1">
-                  <h3 className="font-semibold text-gray-900">{project.creator}</h3>
-                  <p className="text-gray-600 text-sm">{project.creatorBio}</p>
+                  <h3 className="font-semibold text-gray-900">{creator}</h3>
+                  <p className="text-gray-600 text-sm">{project.creator_bio || project.creatorBio || "Magic creator"}</p>
                 </div>
                 <Button variant="outline" size="sm" className="border-[#BE5F93]/20 hover:border-[#BE5F93]/40 hover:text-[#BE5F93]">
                   Follow
