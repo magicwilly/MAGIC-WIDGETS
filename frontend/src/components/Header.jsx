@@ -39,18 +39,7 @@ const Header = () => {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className="text-gray-600 hover:text-[#BE5F93] transition-colors duration-200 font-medium"
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
+          {/* Desktop Navigation - Removed to clean up header */}
 
           {/* Search Bar */}
           <form onSubmit={handleSearch} className="hidden lg:flex flex-1 max-w-md mx-8">
