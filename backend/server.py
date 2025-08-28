@@ -2,7 +2,6 @@ from fastapi import FastAPI, APIRouter
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from pathlib import Path
-import os
 import logging
 
 # Import routes
