@@ -208,7 +208,7 @@ const Home = () => {
           <Sparkles className="h-12 w-12 mx-auto mb-4 opacity-90" />
           <h2 className="text-4xl font-bold mb-4">Ready to Create <span className="text-white">Magic</span>?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
-            Join thousands of magicians who have successfully funded their dreams through FundMagic by Sleight School.
+            Join thousands of magicians who have successfully funded their dreams through iFundMagic by Sleight School.
           </p>
           <Button 
             size="lg" 
