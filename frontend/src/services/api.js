@@ -130,8 +130,15 @@ export const categoriesAPI = {
 
 // Backing API calls
 export const backingAPI = {
-  createBacking: async (backingData) => {
-    const response = await apiClient.post('/backing/', backingData);
+  createBacking: async (backingData, paymentIntentId) => {
+    const response = await apiClient.post('/backing/', backingData, {
+      params: { payment_intent_id: paymentIntentId }
+    });
+    return response.data;
+  },
+  
+  createPaymentIntent: async (backingData) => {
+    const response = await apiClient.post('/backing/create-payment-intent', backingData);
     return response.data;
   },
   
