@@ -30,6 +30,25 @@ const ProjectDetail = () => {
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showVideo, setShowVideo] = useState(false);
+  
+  const handleVideoPlay = () => {
+    if (project.video) {
+      // If it's a YouTube URL, convert it to embed format
+      let videoUrl = project.video;
+      if (videoUrl.includes('youtube.com/watch') || videoUrl.includes('youtu.be/')) {
+        // Convert YouTube watch URL to embed URL
+        const videoId = videoUrl.includes('youtu.be/') 
+          ? videoUrl.split('youtu.be/')[1].split('?')[0]
+          : videoUrl.split('v=')[1].split('&')[0];
+        videoUrl = `https://www.youtube.com/embed/${videoId}`;
+        setShowVideo(true);
+      } else {
+        // For other video URLs, open in new tab
+        window.open(videoUrl, '_blank');
+      }
+    }
+  };
   
   useEffect(() => {
     const fetchProject = async () => {
