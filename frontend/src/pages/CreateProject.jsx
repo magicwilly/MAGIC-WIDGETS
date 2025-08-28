@@ -422,7 +422,8 @@ const CreateProject = () => {
               </Button>
             ) : (
               <Button 
-                type="submit" 
+                type="button"
+                onClick={handleSubmit}
                 className="bg-gradient-to-r from-[#BE5F93] to-[#d478a8] hover:from-[#a04d7d] hover:to-[#BE5F93]"
               >
                 <Sparkles className="h-4 w-4 mr-2" />
