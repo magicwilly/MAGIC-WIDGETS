@@ -15,7 +15,7 @@ from PIL import Image
 import io
 
 # Configuration
-BACKEND_URL = "https://microback.preview.emergentagent.com/api"
+BACKEND_URL = "https://ifundmagic.preview.emergentagent.com/api"
 TEST_USER_EMAIL = "magician@sleightschool.com"
 TEST_USER_PASSWORD = "MagicPassword123!"
 TEST_USER_NAME = "Master Magician"
