@@ -20,7 +20,7 @@ load_dotenv(ROOT_DIR / '.env')
 
 # Create the main app
 app = FastAPI(
-    title="FundMagic API",
+    title="iFundMagic API",
     description="Crowdfunding platform for magic projects by Sleight School",
     version="1.0.0"
 )
