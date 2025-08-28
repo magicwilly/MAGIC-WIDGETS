@@ -79,6 +79,37 @@ const CreateProject = () => {
     }));
   };
 
+  const handleFileUpload = async (file) => {
+    if (!file) return;
+
+    try {
+      console.log('🔍 File upload: Starting upload for file:', file.name);
+      
+      // For now, create a temporary URL for the image
+      // In a real implementation, you would upload to a service like AWS S3
+      const imageUrl = URL.createObjectURL(file);
+      
+      setFormData(prev => ({
+        ...prev,
+        image: imageUrl
+      }));
+      
+      toast({
+        title: "Image Selected",
+        description: `Image "${file.name}" has been selected successfully.`,
+      });
+      
+      console.log('🔍 File upload: Image URL set to:', imageUrl);
+    } catch (error) {
+      console.error('❌ File upload error:', error);
+      toast({
+        title: "Upload Error", 
+        description: "Failed to process the image file.",
+        variant: "destructive"
+      });
+    }
+  };
+
   const handleSubmit = async () => {
     try {
       // Validate final form data
