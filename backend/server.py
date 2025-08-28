@@ -76,5 +76,5 @@ async def startup_event():
 @app.on_event("shutdown")
 async def shutdown_event():
     """Cleanup on shutdown"""
-    logger.info("🎩 Shutting down FundMagic API...")
+    logger.info("🎩 Shutting down iFundMagic API...")
     # Client cleanup is handled automatically by motor
