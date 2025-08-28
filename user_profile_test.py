@@ -93,7 +93,12 @@ class UserProfileTester:
             return True
         elif response and response.status_code == 400:
             # User already exists, try login
-            print(f"Registration failed with 400: {response.text}")
+            try:
+                error_data = response.json()
+                print(f"Registration failed with 400: {error_data}")
+            except:
+                print(f"Registration failed with 400: {response.text}")
+            
             login_data = {
                 "email": TEST_USER_EMAIL,
                 "password": TEST_USER_PASSWORD
