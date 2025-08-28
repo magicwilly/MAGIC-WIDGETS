@@ -19,7 +19,8 @@ import {
   Save, 
   X,
   TrendingUp,
-  DollarSign
+  DollarSign,
+  Key
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { userAPI } from '../services/api';
