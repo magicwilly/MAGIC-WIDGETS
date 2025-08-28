@@ -10,6 +10,7 @@ from routes.users import router as users_router
 from routes.projects import router as projects_router
 from routes.categories import router as categories_router
 from routes.backing import router as backing_router
+from routes.upload import router as upload_router
 
 # Import database initialization
 from database import init_categories
