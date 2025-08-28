@@ -11,7 +11,7 @@ import AuthModal from './AuthModal';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(true); // Mock login state
+  const { user, isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleSearch = (e) => {
