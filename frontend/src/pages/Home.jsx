@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
@@ -6,8 +6,38 @@ import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import ProjectCard from '../components/ProjectCard';
 import { ArrowRight, TrendingUp, Star, Users, DollarSign, Target, Sparkles } from 'lucide-react';
 import { featuredProjects, categories, recentlyFunded, trendingProjects, projectStats } from '../data/mockData';
+import { projectsAPI } from '../services/api';
 
 const Home = () => {
+  const [projects, setProjects] = useState(featuredProjects); // Start with mock data as fallback
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        setLoading(true);
+        console.log('🔍 Home: Fetching projects from API...');
+        
+        const apiProjects = await projectsAPI.getProjects({ limit: 6 });
+        console.log('🔍 Home: API projects response:', apiProjects);
+        
+        if (apiProjects && apiProjects.length > 0) {
+          setProjects(apiProjects);
+          console.log('🔍 Home: Using API projects, count:', apiProjects.length);
+        } else {
+          console.log('🔍 Home: No API projects found, using mock data');
+        }
+      } catch (error) {
+        console.error('❌ Home: Error fetching projects from API:', error);
+        console.log('🔍 Home: Falling back to mock data');
+        // Keep using mock data as fallback
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-purple-50/30 to-pink-50/30">
       {/* Hero Section */}
