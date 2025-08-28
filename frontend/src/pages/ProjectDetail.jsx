@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
@@ -21,15 +21,60 @@ import {
   Sparkles
 } from 'lucide-react';
 import { featuredProjects, categories } from '../data/mockData';
+import { projectsAPI } from '../services/api';
 
 const ProjectDetail = () => {
   const { id } = useParams();
   const [selectedReward, setSelectedReward] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
+  const [project, setProject] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   
-  const project = featuredProjects.find(p => p.id === parseInt(id));
+  useEffect(() => {
+    const fetchProject = async () => {
+      try {
+        setLoading(true);
+        console.log('🔍 ProjectDetail: Fetching project with ID:', id);
+        
+        // Try to fetch from API first
+        const apiProject = await projectsAPI.getProject(id);
+        console.log('🔍 ProjectDetail: API response:', apiProject);
+        setProject(apiProject);
+      } catch (error) {
+        console.error('❌ ProjectDetail: Error fetching project from API:', error);
+        
+        // Fallback to mock data for backward compatibility
+        const mockProject = featuredProjects.find(p => p.id === parseInt(id));
+        if (mockProject) {
+          console.log('🔍 ProjectDetail: Using mock data:', mockProject);
+          setProject(mockProject);
+        } else {
+          console.error('❌ ProjectDetail: Project not found in API or mock data');
+          setError('Project not found');
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (id) {
+      fetchProject();
+    }
+  }, [id]);
   
-  if (!project) {
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <Sparkles className="h-16 w-16 mx-auto text-[#BE5F93] animate-spin mb-4" />
+          <h1 className="text-xl font-semibold text-gray-900">Loading magical project...</h1>
+        </div>
+      </div>
+    );
+  }
+  
+  if (error || !project) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
