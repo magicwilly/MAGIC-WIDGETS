@@ -47,10 +47,11 @@ api_router.include_router(backing_router)
 # Include the main router in the app
 app.include_router(api_router)
 
+# CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
-    allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
+    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -62,6 +63,17 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Startup event
+@app.on_event("startup")
+async def startup_event():
+    """Initialize database collections and data"""
+    logger.info("🎩 Starting FundMagic API...")
+    await init_categories()
+    logger.info("✨ FundMagic API started successfully!")
+
+# Shutdown event  
 @app.on_event("shutdown")
-async def shutdown_db_client():
-    client.close()
+async def shutdown_event():
+    """Cleanup on shutdown"""
+    logger.info("🎩 Shutting down FundMagic API...")
+    # Client cleanup is handled automatically by motor
