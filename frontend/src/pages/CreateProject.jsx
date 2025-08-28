@@ -78,19 +78,56 @@ const CreateProject = () => {
 
   const handleSubmit = async () => {
     try {
-      // Here we would normally submit to the API
-      // For now, we'll use mock submission
-      toast({
-        title: "🎩 Magic Project Created Successfully!",
-        description: "Your magical project has been submitted for review.",
-      });
+      // Validate final form data
+      if (!formData.title || !formData.category || !formData.description || !formData.fundingGoal || !formData.duration) {
+        toast({
+          title: "Missing Required Fields",
+          description: "Please complete all required fields before submitting.",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      // Prepare project data for API
+      const projectData = {
+        title: formData.title,
+        subtitle: formData.subtitle,
+        description: formData.description,
+        full_description: formData.description, // Using description for both for now
+        category: formData.category,
+        image: formData.image,
+        video: formData.video,
+        funding_goal: parseFloat(formData.fundingGoal),
+        days_duration: parseInt(formData.duration),
+        location: formData.location,
+        rewards: formData.rewards.map(reward => ({
+          title: reward.title,
+          description: reward.description,
+          amount: parseFloat(reward.amount),
+          estimated_delivery: reward.estimated,
+          is_limited: reward.limited || false,
+          quantity_limit: reward.quantity ? parseInt(reward.quantity) : null
+        })),
+        faqs: [] // Empty for now, can be enhanced later
+      };
+
+      // Submit to API
+      const response = await projectsAPI.createProject(projectData);
       
-      // Navigate after a short delay to show the success message
-      setTimeout(() => navigate('/'), 2000);
+      if (response) {
+        toast({
+          title: "🎩✨ Magic Project Created Successfully!",
+          description: `Your project "${response.title}" has been created and is now live!`,
+        });
+        
+        // Navigate to the created project page
+        setTimeout(() => navigate(`/project/${response.id}`), 2000);
+      }
     } catch (error) {
+      console.error('Project creation error:', error);
       toast({
-        title: "Error",
-        description: "Failed to create project. Please try again.",
+        title: "Project Creation Failed",
+        description: error.response?.data?.detail || "Failed to create project. Please try again.",
         variant: "destructive"
       });
     }
