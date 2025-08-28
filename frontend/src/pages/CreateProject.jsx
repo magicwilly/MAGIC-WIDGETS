@@ -17,6 +17,7 @@ import { useAuth } from '../contexts/AuthContext';
 const CreateProject = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { user, isAuthenticated } = useAuth();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     title: '',
