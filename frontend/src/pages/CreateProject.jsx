@@ -136,6 +136,24 @@ const CreateProject = () => {
     }
   };
 
+  // Check authentication
+  if (!isAuthenticated || !user) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <Card className="w-96 text-center">
+          <CardContent className="pt-6">
+            <Key className="h-16 w-16 mx-auto text-[#BE5F93] mb-4" />
+            <h2 className="text-xl font-bold text-gray-900 mb-4">Sign In Required</h2>
+            <p className="text-gray-600 mb-6">You need to be logged in to create a magical project.</p>
+            <Button asChild className="bg-[#BE5F93] hover:bg-[#a04d7d]">
+              <Link to="/">Go to Homepage</Link>
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
   const nextStep = () => {
     // Basic validation before proceeding
     if (currentStep === 1) {
