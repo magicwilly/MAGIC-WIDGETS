@@ -160,7 +160,7 @@ export const featuredProjects = [
     id: 5,
     title: "Kids Magic Academy - Teaching the Next Generation",
     creator: "Wonder Kids Productions",
-    category: "education",
+    category: "books",
     image: "https://images.unsplash.com/photo-1566197449482-de017bc1358f?w=600&h=400&fit=crop",
     description: "A comprehensive magic education program designed to teach children the art of magic and performance.",
     fullDescription: "Our curriculum combines magic instruction with confidence building, public speaking, and creative thinking skills for children ages 6-16.",
