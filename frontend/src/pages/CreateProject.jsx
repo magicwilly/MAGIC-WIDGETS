@@ -76,14 +76,24 @@ const CreateProject = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Mock project creation
-    toast({
-      title: "🎩 Magic Project Created Successfully!",
-      description: "Your magical project has been submitted for review.",
-    });
-    setTimeout(() => navigate('/'), 2000);
+  const handleSubmit = async () => {
+    try {
+      // Here we would normally submit to the API
+      // For now, we'll use mock submission
+      toast({
+        title: "🎩 Magic Project Created Successfully!",
+        description: "Your magical project has been submitted for review.",
+      });
+      
+      // Navigate after a short delay to show the success message
+      setTimeout(() => navigate('/'), 2000);
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to create project. Please try again.",
+        variant: "destructive"
+      });
+    }
   };
 
   const nextStep = () => {
