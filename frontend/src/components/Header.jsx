@@ -35,7 +35,7 @@ const Header = () => {
               className="h-10 w-10"
             />
             <div className="flex flex-col">
-              <span className="text-xl font-bold text-gray-900">Fund<span className="text-[#BE5F93]">Magic</span></span>
+              <span className="text-xl font-bold text-gray-900"><span className="text-[#BE5F93]">i</span>Fund<span className="text-[#BE5F93]">Magic</span></span>
               <span className="text-xs text-gray-600 -mt-1">by Sleight School</span>
             </div>
           </Link>
