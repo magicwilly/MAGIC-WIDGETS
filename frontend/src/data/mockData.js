@@ -135,7 +135,7 @@ export const featuredProjects = [
     id: 4,
     title: "Magic Comedy Hour - Live Streaming Show",
     creator: "The Laughing Magicians",
-    category: "comedy",
+    category: "events",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop",
     description: "A weekly live-streamed comedy magic show featuring guest magicians from around the world.",
     fullDescription: "Join us every Friday for an hour of hilarious magic performances, interviews with top magicians, and audience participation from the comfort of your home.",
