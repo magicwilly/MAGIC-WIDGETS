@@ -153,19 +153,7 @@ const Header = () => {
                 </div>
               </form>
               
-              {/* Mobile Navigation */}
-              <nav className="space-y-2 px-2">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className="block px-3 py-2 text-gray-600 hover:text-[#BE5F93] hover:bg-gray-50 rounded-md transition-colors duration-200"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </nav>
+              {/* Mobile Navigation - Removed to clean up header */}
 
               {/* Mobile User Actions */}
               {!isLoggedIn && (
