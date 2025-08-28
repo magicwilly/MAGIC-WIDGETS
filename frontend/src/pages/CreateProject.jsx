@@ -459,9 +459,25 @@ const CreateProject = () => {
                   <div className="mt-2 border-2 border-dashed border-[#BE5F93]/30 rounded-lg p-8 text-center hover:border-[#BE5F93]/50 transition-colors">
                     <Upload className="h-8 w-8 mx-auto text-[#BE5F93] mb-2" />
                     <p className="text-gray-600 mb-2">Upload your main project image</p>
-                    <Button type="button" variant="outline" size="sm" className="border-[#BE5F93]/20 hover:border-[#BE5F93]/40">
+                    <input
+                      type="file"
+                      id="projectImage"
+                      accept="image/*"
+                      onChange={(e) => handleFileUpload(e.target.files[0])}
+                      className="hidden"
+                    />
+                    <Button 
+                      type="button" 
+                      variant="outline" 
+                      size="sm" 
+                      className="border-[#BE5F93]/20 hover:border-[#BE5F93]/40"
+                      onClick={() => document.getElementById('projectImage').click()}
+                    >
                       Choose File
                     </Button>
+                    {formData.image && (
+                      <p className="text-sm text-green-600 mt-2">✓ Image selected: {formData.image}</p>
+                    )}
                   </div>
                 </div>
 
