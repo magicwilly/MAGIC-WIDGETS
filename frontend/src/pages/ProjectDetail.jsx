@@ -318,7 +318,7 @@ const ProjectDetail = () => {
 
                 <div className="grid grid-cols-2 gap-4 mb-6 text-center">
                   <div>
-                    <div className="text-lg font-bold text-gray-900">{project.backers}</div>
+                    <div className="text-lg font-bold text-gray-900">{backers}</div>
                     <div className="text-sm text-gray-600">magical backers</div>
                   </div>
                   <div>
