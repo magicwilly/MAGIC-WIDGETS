@@ -21,9 +21,9 @@ const Header = () => {
   };
 
   const navigation = [
-    { name: 'Discover', href: '/discover' },
+    { name: 'Discover Magic', href: '/discover' },
     { name: 'Start a Project', href: '/create' },
-    { name: 'About', href: '/about' }
+    { name: 'About Sleight School', href: '/about' }
   ];
 
   return (
@@ -31,9 +31,16 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="h-8 w-8 rounded bg-gradient-to-br from-emerald-500 to-blue-600"></div>
-            <span className="text-xl font-bold text-gray-900">FundCraft</span>
+          <Link to="/" className="flex items-center space-x-3">
+            <img 
+              src="https://customer-assets.emergentagent.com/job_microback/artifacts/foo53qjv_Fuscia%20ss%20logo%20shield.png" 
+              alt="Sleight School Logo" 
+              className="h-10 w-10"
+            />
+            <div className="flex flex-col">
+              <span className="text-xl font-bold text-gray-900">FundMagic</span>
+              <span className="text-xs text-gray-600 -mt-1">by Sleight School</span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -42,7 +49,7 @@ const Header = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className="text-gray-600 hover:text-gray-900 transition-colors duration-200 font-medium"
+                className="text-gray-600 hover:text-[#BE5F93] transition-colors duration-200 font-medium"
               >
                 {item.name}
               </Link>
@@ -55,10 +62,10 @@ const Header = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
               <Input
                 type="text"
-                placeholder="Search projects..."
+                placeholder="Search magical projects..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 w-full"
+                className="pl-10 pr-4 w-full focus:ring-[#BE5F93] focus:border-[#BE5F93]"
               />
             </div>
           </form>
@@ -71,7 +78,7 @@ const Header = () => {
                   variant="default"
                   size="sm"
                   asChild
-                  className="hidden md:flex bg-gradient-to-r from-emerald-500 to-blue-600 hover:from-emerald-600 hover:to-blue-700"
+                  className="hidden md:flex bg-[#BE5F93] hover:bg-[#a04d7d] text-white"
                 >
                   <Link to="/create">
                     <Plus className="h-4 w-4 mr-2" />
@@ -125,7 +132,7 @@ const Header = () => {
                 <Button variant="ghost" size="sm" onClick={() => setIsLoggedIn(true)}>
                   Log In
                 </Button>
-                <Button size="sm" className="bg-gradient-to-r from-emerald-500 to-blue-600 hover:from-emerald-600 hover:to-blue-700">
+                <Button size="sm" className="bg-[#BE5F93] hover:bg-[#a04d7d] text-white">
                   Sign Up
                 </Button>
               </div>
@@ -153,10 +160,10 @@ const Header = () => {
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                   <Input
                     type="text"
-                    placeholder="Search projects..."
+                    placeholder="Search magical projects..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10 pr-4 w-full"
+                    className="pl-10 pr-4 w-full focus:ring-[#BE5F93] focus:border-[#BE5F93]"
                   />
                 </div>
               </form>
@@ -167,7 +174,7 @@ const Header = () => {
                   <Link
                     key={item.name}
                     to={item.href}
-                    className="block px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors duration-200"
+                    className="block px-3 py-2 text-gray-600 hover:text-[#BE5F93] hover:bg-gray-50 rounded-md transition-colors duration-200"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.name}
@@ -181,7 +188,7 @@ const Header = () => {
                   <Button variant="ghost" onClick={() => setIsLoggedIn(true)}>
                     Log In
                   </Button>
-                  <Button className="bg-gradient-to-r from-emerald-500 to-blue-600">
+                  <Button className="bg-[#BE5F93] hover:bg-[#a04d7d] text-white">
                     Sign Up
                   </Button>
                 </div>
