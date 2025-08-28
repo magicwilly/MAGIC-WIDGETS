@@ -8,6 +8,8 @@ import Discover from "./pages/Discover";
 import ProjectDetail from "./pages/ProjectDetail";
 import CreateProject from "./pages/CreateProject";
 import Profile from "./pages/Profile";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
 import { Toaster } from "./components/ui/toaster";
 import { AuthProvider } from "./contexts/AuthContext";
 
