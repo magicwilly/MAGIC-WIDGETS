@@ -12,6 +12,7 @@ import { Plus, X, Upload, DollarSign, Calendar, Target, Sparkles } from 'lucide-
 import { categories } from '../data/mockData';
 import { useToast } from '../hooks/use-toast';
 import { projectsAPI } from '../services/api';
+import { useAuth } from '../contexts/AuthContext';
 
 const CreateProject = () => {
   const navigate = useNavigate();
