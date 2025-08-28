@@ -31,7 +31,7 @@ api_router = APIRouter(prefix="/api")
 # Health check endpoint
 @api_router.get("/")
 async def root():
-    return {"message": "🎩✨ Welcome to FundMagic API - Where Magic Meets Funding! ✨🎩"}
+    return {"message": "🎩✨ Welcome to iFundMagic API - Where Magic Meets Funding! ✨🎩"}
 
 @api_router.get("/health")
 async def health_check():
