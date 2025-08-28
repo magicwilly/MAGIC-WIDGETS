@@ -88,8 +88,14 @@ const ProjectDetail = () => {
     );
   }
 
-  const fundingPercentage = (project.currentFunding / project.fundingGoal) * 100;
-  const daysLeft = project.daysLeft || 0;
+  // Handle property name differences between API and mock data
+  const currentFunding = project.current_funding || project.currentFunding || 0;
+  const fundingGoal = project.funding_goal || project.fundingGoal || 1;
+  const creator = project.creator_name || project.creator || 'Unknown Creator';
+  const backers = project.backers_count || project.backers || 0;
+  const daysLeft = project.days_left !== undefined ? project.days_left : project.daysLeft || 0;
+  
+  const fundingPercentage = (currentFunding / fundingGoal) * 100;
   const category = categories.find(c => c.id === project.category);
 
   return (
