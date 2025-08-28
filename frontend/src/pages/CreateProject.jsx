@@ -138,7 +138,7 @@ const CreateProject = () => {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           {/* Step 1: Project Basics */}
           {currentStep === 1 && (
             <Card>
