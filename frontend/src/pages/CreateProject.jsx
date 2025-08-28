@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Separator } from '../components/ui/separator';
-import { Plus, X, Upload, DollarSign, Calendar, Target, Sparkles } from 'lucide-react';
+import { Plus, X, Upload, DollarSign, Calendar, Target, Sparkles, Key } from 'lucide-react';
 import { categories } from '../data/mockData';
 import { useToast } from '../hooks/use-toast';
 import { projectsAPI } from '../services/api';
