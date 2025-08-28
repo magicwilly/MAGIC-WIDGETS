@@ -6,7 +6,14 @@ import { Progress } from './ui/progress';
 import { MapPin, Calendar, Users } from 'lucide-react';
 
 const ProjectCard = ({ project, size = 'default' }) => {
-  const fundingPercentage = (project.currentFunding / project.fundingGoal) * 100;
+  // Handle both backend property names and frontend mock data property names
+  const currentFunding = project.current_funding || project.currentFunding || 0;
+  const fundingGoal = project.funding_goal || project.fundingGoal || 1;
+  const creator = project.creator_name || project.creator || 'Unknown Creator';
+  const backers = project.backers_count || project.backers || 0;
+  const daysLeft = project.days_left !== undefined ? project.days_left : project.daysLeft;
+  
+  const fundingPercentage = (currentFunding / fundingGoal) * 100;
   const isCompact = size === 'compact';
 
   return (
