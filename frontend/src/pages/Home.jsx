@@ -160,7 +160,7 @@ const Home = () => {
       <section className="py-16 bg-gradient-to-br from-[#BE5F93]/5 to-pink-50/50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">How FundMagic Works</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">How <span className="text-[#BE5F93]">i</span>Fund<span className="text-[#BE5F93]">Magic</span> Works</h2>
             <p className="text-gray-600">Three simple steps to bring your magical ideas to life</p>
           </div>
           
