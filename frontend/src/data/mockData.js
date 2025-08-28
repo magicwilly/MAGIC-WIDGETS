@@ -4,6 +4,7 @@ export const categories = [
   { id: 'closeup', name: 'Close-up Magic', icon: '🃏' },
   { id: 'mentalism', name: 'Mentalism', icon: '🧠' },
   { id: 'props', name: 'Magic Props & Apparatus', icon: '🪄' },
+  { id: 'cards', name: 'Playing Cards', icon: '🂠' },
   { id: 'education', name: 'Magic Education', icon: '📚' },
   { id: 'digital', name: 'Digital & Tech Magic', icon: '💻' },
   { id: 'events', name: 'Magic Events & Shows', icon: '🎪' }
