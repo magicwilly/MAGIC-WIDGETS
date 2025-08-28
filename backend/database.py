@@ -57,7 +57,6 @@ async def init_categories():
             {"id": "props", "name": "Magic Props & Apparatus", "icon": "🪄", "description": "Magical devices and apparatus"},
             {"id": "education", "name": "Magic Education", "icon": "📚", "description": "Teaching and learning magic"},
             {"id": "digital", "name": "Digital & Tech Magic", "icon": "💻", "description": "Technology-enhanced magic"},
-            {"id": "comedy", "name": "Comedy Magic", "icon": "🎭", "description": "Humorous magical performances"},
             {"id": "events", "name": "Magic Events & Shows", "icon": "🎪", "description": "Magic shows and events"}
         ]
         await categories_collection.insert_many(categories)
