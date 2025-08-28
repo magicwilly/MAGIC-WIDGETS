@@ -20,11 +20,7 @@ const Header = () => {
     }
   };
 
-  const navigation = [
-    { name: 'Discover Magic', href: '/discover' },
-    { name: 'Start a Project', href: '/create' },
-    { name: 'About Sleight School', href: '/about' }
-  ];
+  // Removed navigation items to clean up header - these can be accessed elsewhere
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
