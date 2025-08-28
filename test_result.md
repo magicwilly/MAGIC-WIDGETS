@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Please perform comprehensive testing of the iFundMagic backend API. Test all endpoints and functionality including authentication, users, projects, categories, backing system, file upload, error handling, and database integration."
+user_problem_statement: "Test the complete authenticated user flow for project creation to verify the bug fix - ensure projects are properly saved to backend and appear in user profile. Also implement Terms of Service and Privacy Policy pages with provided content."
 
 backend:
   - task: "API Health Check"
