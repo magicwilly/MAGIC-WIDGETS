@@ -5,7 +5,8 @@ import { Input } from './ui/input';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from './ui/dropdown-menu';
 import { Search, Menu, X, User, Heart, Settings, LogOut, Plus } from 'lucide-react';
-import { mockUser } from '../data/mockData';
+import { useAuth } from '../contexts/AuthContext';
+import AuthModal from './AuthModal';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
