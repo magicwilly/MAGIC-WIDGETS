@@ -26,6 +26,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { userAPI } from '../services/api';
 import { useToast } from '../hooks/use-toast';
 import ProjectCard from '../components/ProjectCard';
+import PhotoUpload from '../components/PhotoUpload';
 
 const Profile = () => {
   const { user, updateUser } = useAuth();
