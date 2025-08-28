@@ -97,7 +97,32 @@ const CreateProject = () => {
   };
 
   const nextStep = () => {
-    if (currentStep < 4) setCurrentStep(currentStep + 1);
+    // Basic validation before proceeding
+    if (currentStep === 1) {
+      if (!formData.title || !formData.category || !formData.description) {
+        toast({
+          title: "Missing Required Fields",
+          description: "Please fill in all required fields before proceeding.",
+          variant: "destructive"
+        });
+        return;
+      }
+    }
+    
+    if (currentStep === 2) {
+      if (!formData.fundingGoal || !formData.duration) {
+        toast({
+          title: "Missing Required Fields", 
+          description: "Please set your funding goal and campaign duration.",
+          variant: "destructive"
+        });
+        return;
+      }
+    }
+    
+    if (currentStep < 4) {
+      setCurrentStep(currentStep + 1);
+    }
   };
 
   const prevStep = () => {
