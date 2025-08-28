@@ -22,7 +22,7 @@ const Home = () => {
             
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
               Fund the Future of
-              <span className="bg-gradient-to-r from-[#BE5F93] to-[#d478a8] bg-clip-text text-transparent"> Magic </span>
+              <span className="text-[#BE5F93]"> Magic </span>
             </h1>
             
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
