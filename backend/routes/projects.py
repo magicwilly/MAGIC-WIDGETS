@@ -91,7 +91,11 @@ async def get_project(project_id: str):
     # Calculate funding percentage
     funding_percentage = (project["current_funding"] / project["funding_goal"]) * 100 if project["funding_goal"] > 0 else 0
     
-    return ProjectResponse(**project, days_left=days_left, funding_percentage=funding_percentage)
+    # Update project data with calculated values
+    project["days_left"] = days_left
+    project["funding_percentage"] = funding_percentage
+    
+    return ProjectResponse(**project)
 
 @router.post("/", response_model=ProjectResponse)
 async def create_project(
