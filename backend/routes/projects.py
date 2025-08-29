@@ -250,7 +250,9 @@ async def create_project_update(
     # Create update
     update = ProjectUpdate(
         title=update_data["title"],
-        content=update_data["content"]
+        content=update_data["content"],
+        images=update_data.get("images", []),
+        videos=update_data.get("videos", [])
     )
     
     # Add update to project
