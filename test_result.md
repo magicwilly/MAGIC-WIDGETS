@@ -288,6 +288,21 @@ backend:
           agent: "testing"
           comment: "🎯 MIXED RESULTS - PARTIAL SUCCESS: ✅ YOUTUBE VIDEO FUNCTIONALITY WORKING PERFECTLY: Play button functional, YouTube URLs properly convert to embed format (https://www.youtube.com/embed/example), video iframe displays correctly, 'Show Image' button present and functional. Video toggle works from image to video mode successfully. ❌ AVATAR DISPLAY ISSUE: API returns creator_avatar: null for all projects, causing avatar to show only initials ('M') without proper avatar image or styled fallback. The Avatar component structure exists but no actual avatar images are displayed. 🔍 ROOT CAUSE: Backend API provides creator_avatar field but value is null for all projects, and frontend Avatar component shows basic initials fallback instead of proper avatar images. 🎯 IMPACT: Video functionality is 100% working, but avatar display needs either backend data population or improved frontend fallback styling."
 
+  - task: "Category Filtering Functionality Bug Fix"
+    implemented: true
+    working: true
+    file: "frontend/src/pages/Discover.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "BUG REPORTED: Clicking on a category on the homepage shows all projects without category filter applied. FIX IMPLEMENTED: Updated Discover.jsx to use useParams to read category from URL, added useEffect to set selectedCategory from URL parameter, added API integration to fetch real projects instead of just mock data, updated filtering logic to handle both API and mock data properties."
+        - working: true
+          agent: "testing"
+          comment: "🎉 CATEGORY FILTERING BUG FIX COMPLETELY SUCCESSFUL! Comprehensive testing confirms the bug has been resolved: ✅ HOMEPAGE CATEGORY NAVIGATION: All 6 category cards found (Illusion & Stage Magic, Close-up Magic, Mentalism, Magic Books, Playing Cards, Magic Events & Shows) with correct URLs (/category/illusion, /category/closeup, etc.) ✅ CATEGORY URL STRUCTURE: Navigation working perfectly to /category/{categoryId} format ✅ CATEGORY FILTER APPLICATION: URL parameter detection working (console logs show 'URL category parameter found: closeup/illusion/mentalism') ✅ PROJECT FILTERING VERIFICATION: Different categories show different project counts - Close-up Magic: 1 project, Illusion: 10 projects, All categories: 16 projects, Mentalism: 2 projects ✅ CONSOLE DEBUGGING: All expected debug logs present ('🔍 Discover: URL category parameter found', '🔍 Discover: Using API projects, count: 11') ✅ API INTEGRATION: Real projects fetched from backend API successfully. 🎯 SUCCESS CRITERIA MET: Category links navigate correctly, Discover page reads URL parameters, projects are filtered by category, different categories show different project sets, console logs confirm functionality. The original bug where 'clicking on a category shows all projects without filter' has been completely resolved!"
+
 frontend:
   - task: "Homepage & Navigation"
     implemented: true
