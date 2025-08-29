@@ -145,8 +145,8 @@ const Profile = () => {
               <div className="flex-shrink-0">
                 <Avatar className="h-24 w-24 border-4 border-[#BE5F93]/20">
                   <AvatarImage src={user.avatar || editForm.avatar} alt={user.name} />
-                  <AvatarFallback className="bg-[#BE5F93]/10 text-[#BE5F93] text-2xl">
-                    {user.name?.charAt(0) || 'M'}
+                  <AvatarFallback className="bg-gradient-to-br from-[#BE5F93] to-[#a04d7d] text-white font-bold text-3xl">
+                    {(user.name?.charAt(0) || 'M').toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
               </div>
