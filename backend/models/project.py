@@ -26,6 +26,8 @@ class ProjectUpdate(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     title: str
     content: str
+    images: List[str] = Field(default_factory=list)  # List of image URLs
+    videos: List[str] = Field(default_factory=list)  # List of video URLs
     created_at: datetime = Field(default_factory=datetime.utcnow)
 
 class ProjectComment(BaseModel):
