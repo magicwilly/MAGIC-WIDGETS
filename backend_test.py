@@ -1058,6 +1058,17 @@ class iFundMagicAPITester:
         self.test_project_creation()
         self.test_projects_retrieval()
         self.test_individual_project()
+        
+        # NEW FEATURE TESTS - Project Editing and Updates
+        print("\n" + "="*60)
+        print("🎯 TESTING NEW FEATURES - PROJECT EDITING & UPDATES")
+        print("="*60)
+        self.test_project_story_update()
+        self.test_project_updates_with_media()
+        self.test_enhanced_project_retrieval()
+        self.test_data_validation()
+        
+        # Legacy tests
         self.test_project_updates_and_comments()
         self.test_backing_system()
         self.test_file_upload()
