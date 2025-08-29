@@ -226,6 +226,35 @@ async def delete_project(
     
     return {"message": "Project deleted successfully"}
 
+@router.patch("/{project_id}/story")
+async def update_project_story(
+    project_id: str,
+    story_data: dict,
+    current_user: UserResponse = Depends(get_current_user)
+):
+    """Update project story (only by creator)"""
+    project = await projects_collection.find_one({"id": project_id})
+    if not project:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Project not found"
+        )
+    
+    # Check if user is the creator
+    if project["creator_id"] != current_user.id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Only project creator can update the story"
+        )
+    
+    # Update only the story field
+    await projects_collection.update_one(
+        {"id": project_id},
+        {"$set": {"story": story_data.get("story", "")}}
+    )
+    
+    return {"message": "Project story updated successfully"}
+
 @router.post("/{project_id}/updates", response_model=ProjectResponse)
 async def create_project_update(
     project_id: str,
