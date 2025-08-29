@@ -90,6 +90,7 @@ class ProjectResponse(BaseModel):
     subtitle: Optional[str]
     description: str
     full_description: str
+    story: Optional[str]  # Project story field for updates
     category: str
     image: Optional[str]
     video: Optional[str]
