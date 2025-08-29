@@ -138,26 +138,39 @@ const EditProject = ({ project, onUpdate, isCreator }) => {
 
   // Handle file upload (for story or updates)
   const handleFileUpload = async (file, type = 'image', context = 'story') => {
-    if (!file) return;
+    console.log('🔍 EditProject: File upload triggered:', { file: file?.name, type, context });
+    if (!file) {
+      console.log('❌ EditProject: No file provided');
+      return;
+    }
 
     try {
       // For now, create a temporary URL
       // In production, you would upload to a service like AWS S3
       const fileUrl = URL.createObjectURL(file);
+      console.log('🔍 EditProject: Created file URL:', fileUrl);
       
       if (context === 'story') {
         if (type === 'image') {
-          setStoryImages(prev => [...prev, fileUrl]);
+          console.log('🔍 EditProject: Adding image to story');
+          setStoryImages(prev => {
+            const newImages = [...prev, fileUrl];
+            console.log('🔍 EditProject: Story images updated:', newImages);
+            return newImages;
+          });
         } else {
+          console.log('🔍 EditProject: Adding video to story');
           setStoryVideos(prev => [...prev, fileUrl]);
         }
       } else {
         if (type === 'image') {
+          console.log('🔍 EditProject: Adding image to update');
           setNewUpdate(prev => ({
             ...prev,
             images: [...prev.images, fileUrl]
           }));
         } else {
+          console.log('🔍 EditProject: Adding video to update');
           setNewUpdate(prev => ({
             ...prev,
             videos: [...prev.videos, fileUrl]
@@ -170,7 +183,7 @@ const EditProject = ({ project, onUpdate, isCreator }) => {
         description: `${type === 'image' ? 'Image' : 'Video'} added successfully`,
       });
     } catch (error) {
-      console.error('File upload error:', error);
+      console.error('❌ EditProject: File upload error:', error);
       toast({
         title: "Upload Error",
         description: `Failed to add ${type}`,
