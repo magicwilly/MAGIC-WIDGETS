@@ -53,8 +53,17 @@ const EditProject = ({ project, onUpdate, isCreator }) => {
       setStory(project.story);
     } else {
       console.log('🔍 EditProject: No story found in project:', project);
+      setStory(''); // Reset to empty if no story
     }
   }, [project]);
+
+  // Also initialize story when modal opens
+  useEffect(() => {
+    if (isOpen && project?.story && !story) {
+      console.log('🔍 EditProject: Modal opened, initializing story:', project.story.substring(0, 100) + '...');
+      setStory(project.story);
+    }
+  }, [isOpen, project, story]);
 
   // Handle story update
   const handleStoryUpdate = async () => {
