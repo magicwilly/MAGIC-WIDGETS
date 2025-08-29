@@ -4,56 +4,56 @@
     "status": "\u2705 PASS",
     "message": "API root accessible",
     "details": null,
-    "timestamp": "2025-08-29T00:44:48.857946"
+    "timestamp": "2025-08-29T01:59:19.007277"
   },
   {
     "test": "Health Check",
     "status": "\u2705 PASS",
     "message": "API is healthy",
     "details": null,
-    "timestamp": "2025-08-29T00:44:48.910855"
+    "timestamp": "2025-08-29T01:59:19.062308"
   },
   {
     "test": "User Registration",
     "status": "\u274c FAIL",
     "message": "Registration failed",
     "details": "No response",
-    "timestamp": "2025-08-29T00:44:48.976371"
+    "timestamp": "2025-08-29T01:59:19.113936"
   },
   {
     "test": "Duplicate Registration Prevention",
     "status": "\u274c FAIL",
     "message": "Should have failed with 400",
     "details": "Status: No response",
-    "timestamp": "2025-08-29T00:44:49.028662"
+    "timestamp": "2025-08-29T01:59:19.163733"
   },
   {
     "test": "User Login",
     "status": "\u2705 PASS",
     "message": "Login successful",
     "details": null,
-    "timestamp": "2025-08-29T00:44:49.313705"
+    "timestamp": "2025-08-29T01:59:19.447879"
   },
   {
     "test": "Invalid Login Prevention",
     "status": "\u274c FAIL",
     "message": "Should have failed with 401",
     "details": "Status: No response",
-    "timestamp": "2025-08-29T00:44:49.599880"
+    "timestamp": "2025-08-29T01:59:19.737402"
   },
   {
     "test": "Get Profile",
     "status": "\u2705 PASS",
     "message": "Profile retrieved successfully",
     "details": null,
-    "timestamp": "2025-08-29T00:44:49.649732"
+    "timestamp": "2025-08-29T01:59:19.793110"
   },
   {
     "test": "Update Profile",
     "status": "\u2705 PASS",
     "message": "Profile updated successfully",
     "details": null,
-    "timestamp": "2025-08-29T00:44:49.702297"
+    "timestamp": "2025-08-29T01:59:19.845015"
   },
   {
     "test": "Categories Retrieval",
@@ -69,307 +69,300 @@
       "comedy",
       "events"
     ],
-    "timestamp": "2025-08-29T00:44:49.766232"
+    "timestamp": "2025-08-29T01:59:19.900861"
   },
   {
     "test": "Project Creation",
     "status": "\u2705 PASS",
     "message": "Project created successfully",
     "details": null,
-    "timestamp": "2025-08-29T00:44:49.825875"
+    "timestamp": "2025-08-29T01:59:19.958609"
   },
   {
     "test": "Project Data Validation",
     "status": "\u2705 PASS",
     "message": "Project data correct",
     "details": null,
-    "timestamp": "2025-08-29T00:44:49.825910"
+    "timestamp": "2025-08-29T01:59:19.958649"
   },
   {
     "test": "Get All Projects",
-    "status": "\u2705 PASS",
-    "message": "Retrieved 13 projects",
-    "details": null,
-    "timestamp": "2025-08-29T00:44:49.876959"
-  },
-  {
-    "test": "Project Structure",
-    "status": "\u2705 PASS",
-    "message": "Project fields correct",
-    "details": null,
-    "timestamp": "2025-08-29T00:44:49.877006"
+    "status": "\u274c FAIL",
+    "message": "Failed to get projects",
+    "details": "Status: No response",
+    "timestamp": "2025-08-29T01:59:20.010340"
   },
   {
     "test": "Category Filtering",
-    "status": "\u2705 PASS",
-    "message": "Retrieved 5 card projects",
-    "details": null,
-    "timestamp": "2025-08-29T00:44:49.930399"
+    "status": "\u274c FAIL",
+    "message": "Category filtering failed",
+    "details": "Status: No response",
+    "timestamp": "2025-08-29T01:59:20.064044"
   },
   {
     "test": "Search Functionality",
-    "status": "\u2705 PASS",
-    "message": "Search returned 7 results",
-    "details": null,
-    "timestamp": "2025-08-29T00:44:49.981842"
+    "status": "\u274c FAIL",
+    "message": "Search failed",
+    "details": "Status: No response",
+    "timestamp": "2025-08-29T01:59:20.121698"
   },
   {
     "test": "Get Individual Project",
     "status": "\u2705 PASS",
     "message": "Project retrieved successfully",
     "details": null,
-    "timestamp": "2025-08-29T00:44:50.040776"
+    "timestamp": "2025-08-29T01:59:20.170867"
   },
   {
     "test": "Project Details",
     "status": "\u2705 PASS",
     "message": "All detailed fields present",
     "details": null,
-    "timestamp": "2025-08-29T00:44:50.040833"
+    "timestamp": "2025-08-29T01:59:20.170908"
   },
   {
     "test": "Story Update - Creator Access",
     "status": "\u2705 PASS",
     "message": "Story updated by creator successfully",
     "details": null,
-    "timestamp": "2025-08-29T00:44:50.100767"
+    "timestamp": "2025-08-29T01:59:20.221637"
   },
   {
     "test": "Story Update - Verification",
     "status": "\u2705 PASS",
     "message": "Story update endpoint working",
     "details": null,
-    "timestamp": "2025-08-29T00:44:50.149426"
+    "timestamp": "2025-08-29T01:59:20.268685"
   },
   {
     "test": "Story Update - No Auth",
     "status": "\u274c FAIL",
     "message": "Should have failed with 401",
     "details": "Status: No response",
-    "timestamp": "2025-08-29T00:44:50.202239"
+    "timestamp": "2025-08-29T01:59:20.320201"
   },
   {
     "test": "Story Update - Non-Creator",
     "status": "\u274c FAIL",
-    "message": "Should have failed with 403",
-    "details": "Status: No response",
-    "timestamp": "2025-08-29T00:44:50.544262"
+    "message": "Could not create test user for authorization test",
+    "details": null,
+    "timestamp": "2025-08-29T01:59:20.366133"
   },
   {
     "test": "Story Update - Empty Content",
     "status": "\u2705 PASS",
     "message": "Empty story content accepted (valid behavior)",
     "details": null,
-    "timestamp": "2025-08-29T00:44:50.603411"
+    "timestamp": "2025-08-29T01:59:20.437325"
   },
   {
     "test": "Update Creation - Basic",
     "status": "\u2705 PASS",
     "message": "Basic update created successfully",
     "details": null,
-    "timestamp": "2025-08-29T00:44:50.662524"
+    "timestamp": "2025-08-29T01:59:20.510222"
   },
   {
     "test": "Update Structure - Media Arrays",
     "status": "\u2705 PASS",
     "message": "Images and videos arrays present",
     "details": null,
-    "timestamp": "2025-08-29T00:44:50.662560"
+    "timestamp": "2025-08-29T01:59:20.510255"
   },
   {
     "test": "Update Creation - With Images",
     "status": "\u2705 PASS",
     "message": "Update with images created successfully",
     "details": null,
-    "timestamp": "2025-08-29T00:44:50.716607"
+    "timestamp": "2025-08-29T01:59:20.569905"
   },
   {
     "test": "Update Creation - With Videos",
     "status": "\u2705 PASS",
     "message": "Update with videos created successfully",
     "details": null,
-    "timestamp": "2025-08-29T00:44:50.770645"
+    "timestamp": "2025-08-29T01:59:20.626291"
   },
   {
     "test": "Update Creation - Mixed Media",
     "status": "\u2705 PASS",
     "message": "Update with both images and videos created successfully",
     "details": null,
-    "timestamp": "2025-08-29T00:44:50.831418"
+    "timestamp": "2025-08-29T01:59:20.683750"
   },
   {
     "test": "Update Timestamp",
     "status": "\u2705 PASS",
     "message": "Created_at timestamp properly set",
     "details": null,
-    "timestamp": "2025-08-29T00:44:50.831457"
+    "timestamp": "2025-08-29T01:59:20.683796"
   },
   {
     "test": "Update Authorization",
     "status": "\u274c FAIL",
-    "message": "Should have failed with 403",
-    "details": "Status: No response",
-    "timestamp": "2025-08-29T00:44:51.167835"
+    "message": "Could not create test user for authorization test",
+    "details": null,
+    "timestamp": "2025-08-29T01:59:20.731395"
   },
   {
     "test": "Project Updates Retrieval",
     "status": "\u2705 PASS",
     "message": "Retrieved 4 updates",
     "details": null,
-    "timestamp": "2025-08-29T00:44:51.221692"
+    "timestamp": "2025-08-29T01:59:20.782288"
   },
   {
     "test": "Update Structure Validation",
     "status": "\u2705 PASS",
     "message": "Required update fields present",
     "details": null,
-    "timestamp": "2025-08-29T00:44:51.221731"
+    "timestamp": "2025-08-29T01:59:20.782326"
   },
   {
     "test": "Update Media Fields",
     "status": "\u2705 PASS",
     "message": "Images and videos fields present in updates",
     "details": null,
-    "timestamp": "2025-08-29T00:44:51.221738"
+    "timestamp": "2025-08-29T01:59:20.782332"
   },
   {
     "test": "Update Media Types",
     "status": "\u2705 PASS",
     "message": "Images and videos are properly typed as lists",
     "details": null,
-    "timestamp": "2025-08-29T00:44:51.221744"
+    "timestamp": "2025-08-29T01:59:20.782339"
   },
   {
     "test": "Update Ordering",
     "status": "\u274c FAIL",
     "message": "Updates not properly ordered",
     "details": null,
-    "timestamp": "2025-08-29T00:44:51.221754"
+    "timestamp": "2025-08-29T01:59:20.782350"
   },
   {
     "test": "Update Validation - Missing Content",
     "status": "\u274c FAIL",
     "message": "Should reject missing content",
     "details": "Status: No response",
-    "timestamp": "2025-08-29T00:44:51.271055"
+    "timestamp": "2025-08-29T01:59:20.833172"
   },
   {
     "test": "Update Validation - Missing Title",
     "status": "\u274c FAIL",
     "message": "Should reject missing title",
     "details": "Status: No response",
-    "timestamp": "2025-08-29T00:44:51.321600"
+    "timestamp": "2025-08-29T01:59:20.884877"
   },
   {
     "test": "Update Validation - Invalid Media Types",
     "status": "\u274c FAIL",
     "message": "No response to invalid media test",
     "details": null,
-    "timestamp": "2025-08-29T00:44:51.373232"
+    "timestamp": "2025-08-29T01:59:20.940511"
   },
   {
     "test": "Create Project Comment",
     "status": "\u2705 PASS",
     "message": "Comment created successfully",
     "details": null,
-    "timestamp": "2025-08-29T00:44:51.428805"
+    "timestamp": "2025-08-29T01:59:20.997936"
   },
   {
     "test": "Create Backing",
     "status": "\u2705 PASS",
     "message": "Backing created successfully",
     "details": null,
-    "timestamp": "2025-08-29T00:44:51.546637"
+    "timestamp": "2025-08-29T01:59:21.111137"
   },
   {
     "test": "Backing Structure",
     "status": "\u2705 PASS",
     "message": "Backing data structure correct",
     "details": null,
-    "timestamp": "2025-08-29T00:44:51.546687"
+    "timestamp": "2025-08-29T01:59:21.111191"
   },
   {
     "test": "Get Backed Projects",
     "status": "\u2705 PASS",
-    "message": "Retrieved 3 backed projects",
+    "message": "Retrieved 4 backed projects",
     "details": null,
-    "timestamp": "2025-08-29T00:44:51.602923"
+    "timestamp": "2025-08-29T01:59:21.166932"
   },
   {
     "test": "Backing Persistence",
     "status": "\u2705 PASS",
     "message": "Backing found in user's backed projects",
     "details": null,
-    "timestamp": "2025-08-29T00:44:51.602976"
+    "timestamp": "2025-08-29T01:59:21.166985"
   },
   {
     "test": "Avatar Upload",
     "status": "\u2705 PASS",
     "message": "Avatar uploaded successfully",
     "details": null,
-    "timestamp": "2025-08-29T00:44:51.674763"
+    "timestamp": "2025-08-29T01:59:21.244759"
   },
   {
     "test": "Avatar Serving",
     "status": "\u2705 PASS",
     "message": "Avatar served successfully",
     "details": null,
-    "timestamp": "2025-08-29T00:44:51.734109"
+    "timestamp": "2025-08-29T01:59:21.298279"
   },
   {
     "test": "File Size Validation",
     "status": "\u274c FAIL",
     "message": "Large file should have been rejected",
     "details": "Status: 200",
-    "timestamp": "2025-08-29T00:44:51.957367"
+    "timestamp": "2025-08-29T01:59:21.528655"
   },
   {
     "test": "Unauthorized Access Prevention",
     "status": "\u274c FAIL",
     "message": "Should have been blocked",
     "details": "Status: No response",
-    "timestamp": "2025-08-29T00:44:52.010786"
+    "timestamp": "2025-08-29T01:59:21.585158"
   },
   {
     "test": "Invalid Token Prevention",
     "status": "\u274c FAIL",
     "message": "Invalid token should be rejected",
     "details": "Status: No response",
-    "timestamp": "2025-08-29T00:44:52.062089"
+    "timestamp": "2025-08-29T01:59:21.635420"
   },
   {
     "test": "Non-existent Resource",
     "status": "\u274c FAIL",
     "message": "Should return 404",
     "details": "Status: No response",
-    "timestamp": "2025-08-29T00:44:52.112318"
+    "timestamp": "2025-08-29T01:59:21.688470"
   },
   {
     "test": "Invalid Endpoint",
     "status": "\u274c FAIL",
     "message": "Should return 404 for invalid endpoint",
     "details": "Status: No response",
-    "timestamp": "2025-08-29T00:44:52.161752"
+    "timestamp": "2025-08-29T01:59:21.745673"
   },
   {
     "test": "Invalid Data Validation",
     "status": "\u274c FAIL",
     "message": "Should return 422 for invalid data",
     "details": "Status: No response",
-    "timestamp": "2025-08-29T00:44:52.215510"
+    "timestamp": "2025-08-29T01:59:21.796113"
   },
   {
     "test": "Data Persistence",
     "status": "\u2705 PASS",
     "message": "Project-user relationship maintained",
     "details": null,
-    "timestamp": "2025-08-29T00:44:52.269528"
+    "timestamp": "2025-08-29T01:59:21.847684"
   },
   {
     "test": "User-Project Relationship",
-    "status": "\u2705 PASS",
-    "message": "Created project found in user's projects",
+    "status": "\u274c FAIL",
+    "message": "Failed to get created projects",
     "details": null,
-    "timestamp": "2025-08-29T00:44:52.327503"
+    "timestamp": "2025-08-29T01:59:21.900691"
   }
 ]
