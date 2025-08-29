@@ -40,30 +40,42 @@ const EditProject = ({ project, onUpdate, isCreator }) => {
     videos: []
   });
 
+  // FAQ editing state
+  const [faqs, setFaqs] = useState([]);
+  const [newFaq, setNewFaq] = useState({ question: '', answer: '' });
+
+  // Rewards editing state
+  const [rewards, setRewards] = useState([]);
+  const [newReward, setNewReward] = useState({
+    title: '',
+    description: '',
+    amount: '',
+    deliveryDate: '',
+    image: ''
+  });
+
   const fileInputRef = useRef(null);
   const videoInputRef = useRef(null);
   const updateImageInputRef = useRef(null);
   const updateVideoInputRef = useRef(null);
+  const rewardImageInputRef = useRef(null);
 
-  // Initialize story when project changes
+  // Initialize data when project changes or modal opens
   useEffect(() => {
-    console.log('🔍 EditProject: Project changed:', project);
-    if (project && project.story) {
-      console.log('🔍 EditProject: Setting story to:', project.story.substring(0, 100) + '...');
-      setStory(project.story);
-    } else {
-      console.log('🔍 EditProject: No story found in project:', project);
-      setStory(''); // Reset to empty if no story
+    console.log('🔍 EditProject: Project or modal state changed:', { project: !!project, isOpen, story: story.length });
+    if (project) {
+      if (project.story && project.story !== story) {
+        console.log('🔍 EditProject: Initializing story:', project.story.substring(0, 100) + '...');
+        setStory(project.story);
+      }
+      if (project.faqs) {
+        setFaqs(project.faqs || []);
+      }
+      if (project.rewards) {
+        setRewards(project.rewards || []);
+      }
     }
-  }, [project]);
-
-  // Also initialize story when modal opens
-  useEffect(() => {
-    if (isOpen && project?.story && !story) {
-      console.log('🔍 EditProject: Modal opened, initializing story:', project.story.substring(0, 100) + '...');
-      setStory(project.story);
-    }
-  }, [isOpen, project, story]);
+  }, [project, isOpen]);
 
   // Handle story update
   const handleStoryUpdate = async () => {
