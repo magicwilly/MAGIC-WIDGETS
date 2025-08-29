@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
@@ -8,11 +9,23 @@ import { Search, Filter, Grid, List, Sparkles } from 'lucide-react';
 import { featuredProjects, categories } from '../data/mockData';
 
 const Discover = () => {
+  const { category: urlCategory } = useParams();
   const [viewMode, setViewMode] = useState('grid');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('trending');
   const [showFilters, setShowFilters] = useState(false);
+
+  // Update selectedCategory when URL parameter changes
+  useEffect(() => {
+    if (urlCategory) {
+      console.log('🔍 Discover: URL category parameter found:', urlCategory);
+      setSelectedCategory(urlCategory);
+    } else {
+      console.log('🔍 Discover: No URL category, using default "all"');
+      setSelectedCategory('all');
+    }
+  }, [urlCategory]);
 
   const sortOptions = [
     { value: 'trending', label: 'Trending Magic' },
