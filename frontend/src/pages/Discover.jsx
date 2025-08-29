@@ -66,10 +66,10 @@ const Discover = () => {
     { value: 'recently-launched', label: 'Recently Launched' }
   ];
 
-  const filteredProjects = featuredProjects.filter(project => {
+  const filteredProjects = projects.filter(project => {
     const matchesSearch = project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         project.creator.toLowerCase().includes(searchQuery.toLowerCase());
+                         (project.description || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         (project.creator_name || project.creator || '').toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory === 'all' || project.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
