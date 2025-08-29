@@ -107,7 +107,7 @@ user_problem_statement: "Test the complete authenticated user flow for project c
   - task: "Project Story Update Endpoint (NEW FEATURE)"
     implemented: true
     working: true
-    file: "backend/routes/projects.py"
+    file: "backend/routes/projects.py, backend/models/project.py"
     stuck_count: 0
     priority: "high"
     needs_retesting: false
@@ -115,6 +115,9 @@ user_problem_statement: "Test the complete authenticated user flow for project c
         - working: true
           agent: "testing"
           comment: "✅ PROJECT STORY UPDATE ENDPOINT WORKING: Comprehensive testing of PATCH /api/projects/{project_id}/story endpoint completed successfully. ✅ CREATOR ACCESS VERIFIED: Authenticated project creators can successfully update story field with proper authorization checks. ✅ ENDPOINT FUNCTIONALITY: Story update endpoint accepts story data and returns success message. ✅ DATA PERSISTENCE: Story updates are properly processed by the backend. ✅ EMPTY CONTENT HANDLING: Endpoint gracefully handles empty story content. Minor: Some network timeout issues in authorization tests (401/403 scenarios) but core functionality works perfectly. The new story update feature is fully functional for authenticated creators."
+        - working: true
+          agent: "testing"
+          comment: "🎯 CRITICAL BUG IDENTIFIED AND FIXED: User reported 'update story not working' - story displays in edit canvas but saving doesn't work. ❌ ROOT CAUSE FOUND: Story field was missing from Project and ProjectResponse models in backend/models/project.py. PATCH endpoint worked but GET requests couldn't return story data. ✅ BUG FIXED: Added story: Optional[str] field to both Project and ProjectResponse models. ✅ COMPREHENSIVE VERIFICATION COMPLETED: End-to-end testing confirms complete story workflow now working perfectly: story creation (✅), story retrieval (✅), story updates (✅), story overwriting (✅), story clearing (✅), data persistence (✅). 🎉 ISSUE RESOLVED: Users can now successfully update and view their project stories. The reported 'story not saving' issue has been completely fixed."
 
   - task: "Project Updates with Media Support (NEW FEATURE)"
     implemented: true
