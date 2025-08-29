@@ -410,6 +410,17 @@ const ProjectDetail = () => {
                       Share
                     </Button>
                   </div>
+
+                  {/* Edit Project Button - Only visible to project creator */}
+                  {user && project && user.id === project.creator_id && (
+                    <div className="mt-4">
+                      <EditProject 
+                        project={project} 
+                        onUpdate={handleProjectUpdate} 
+                        isCreator={true}
+                      />
+                    </div>
+                  )}
                 </div>
 
                 <Separator className="my-6" />
