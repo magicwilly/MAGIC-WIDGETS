@@ -48,6 +48,7 @@ class Project(BaseModel):
     subtitle: Optional[str] = None
     description: str
     full_description: str
+    story: Optional[str] = None  # Project story field for updates
     category: str
     image: Optional[str] = None
     video: Optional[str] = None
