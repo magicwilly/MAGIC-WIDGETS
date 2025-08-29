@@ -47,8 +47,12 @@ const EditProject = ({ project, onUpdate, isCreator }) => {
 
   // Initialize story when project changes
   useEffect(() => {
+    console.log('🔍 EditProject: Project changed:', project);
     if (project && project.story) {
+      console.log('🔍 EditProject: Setting story to:', project.story.substring(0, 100) + '...');
       setStory(project.story);
+    } else {
+      console.log('🔍 EditProject: No story found in project:', project);
     }
   }, [project]);
 
