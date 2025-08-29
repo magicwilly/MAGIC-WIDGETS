@@ -18,7 +18,10 @@ import {
   Image as ImageIcon, 
   Video,
   FileText,
-  Calendar
+  Calendar,
+  MessageCircle,
+  DollarSign,
+  Trash2
 } from 'lucide-react';
 
 const EditProject = ({ project, onUpdate, isCreator }) => {
