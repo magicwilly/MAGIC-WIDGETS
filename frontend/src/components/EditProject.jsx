@@ -28,7 +28,7 @@ const EditProject = ({ project, onUpdate, isCreator }) => {
   const { toast } = useToast();
   
   // Story editing state
-  const [story, setStory] = useState(project.story || '');
+  const [story, setStory] = useState('');
   const [storyImages, setStoryImages] = useState([]);
   const [storyVideos, setStoryVideos] = useState([]);
   
@@ -42,6 +42,15 @@ const EditProject = ({ project, onUpdate, isCreator }) => {
 
   const fileInputRef = useRef(null);
   const videoInputRef = useRef(null);
+  const updateImageInputRef = useRef(null);
+  const updateVideoInputRef = useRef(null);
+
+  // Initialize story when project changes
+  useEffect(() => {
+    if (project && project.story) {
+      setStory(project.story);
+    }
+  }, [project]);
 
   // Handle story update
   const handleStoryUpdate = async () => {
