@@ -528,7 +528,9 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Category Filtering Functionality Bug Fix"
+    - "Project Story Update Endpoint (NEW FEATURE)"
+    - "Project Updates with Media Support (NEW FEATURE)"
+    - "Enhanced ProjectUpdate Model Validation (NEW FEATURE)"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
