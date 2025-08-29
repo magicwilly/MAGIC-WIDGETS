@@ -88,38 +88,6 @@ const ProjectDetail = () => {
     }
   };
   
-  useEffect(() => {
-    const fetchProject = async () => {
-      try {
-        setLoading(true);
-        console.log('🔍 ProjectDetail: Fetching project with ID:', id);
-        
-        // Try to fetch from API first
-        const apiProject = await projectsAPI.getProject(id);
-        console.log('🔍 ProjectDetail: API response:', apiProject);
-        setProject(apiProject);
-      } catch (error) {
-        console.error('❌ ProjectDetail: Error fetching project from API:', error);
-        
-        // Fallback to mock data for backward compatibility
-        const mockProject = featuredProjects.find(p => p.id === parseInt(id));
-        if (mockProject) {
-          console.log('🔍 ProjectDetail: Using mock data:', mockProject);
-          setProject(mockProject);
-        } else {
-          console.error('❌ ProjectDetail: Project not found in API or mock data');
-          setError('Project not found');
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (id) {
-      fetchProject();
-    }
-  }, [id]);
-  
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
