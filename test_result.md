@@ -540,9 +540,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Project Story Update Endpoint (NEW FEATURE)"
-    - "Project Updates with Media Support (NEW FEATURE)"
-    - "Enhanced ProjectUpdate Model Validation (NEW FEATURE)"
+    - "EditProject Component Bug Fixes"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
