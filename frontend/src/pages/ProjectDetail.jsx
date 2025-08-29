@@ -27,12 +27,48 @@ import EditProject from '../components/EditProject';
 
 const ProjectDetail = () => {
   const { id } = useParams();
+  const { user } = useAuth();
   const [selectedReward, setSelectedReward] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showVideo, setShowVideo] = useState(false);
+  
+  const fetchProject = async () => {
+    try {
+      setLoading(true);
+      console.log('🔍 ProjectDetail: Fetching project with ID:', id);
+      
+      const apiProject = await projectsAPI.getProject(id);
+      console.log('🔍 ProjectDetail: API response:', apiProject);
+      setProject(apiProject);
+    } catch (error) {
+      console.error('❌ ProjectDetail: Error fetching project from API:', error);
+      
+      const mockProject = featuredProjects.find(p => p.id === parseInt(id));
+      if (mockProject) {
+        console.log('🔍 ProjectDetail: Using mock data:', mockProject);
+        setProject(mockProject);
+      } else {
+        console.error('❌ ProjectDetail: Project not found in API or mock data');
+        setError('Project not found');
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  useEffect(() => {
+    if (id) {
+      fetchProject();
+    }
+  }, [id]);
+  
+  const handleProjectUpdate = () => {
+    // Refresh project data after update
+    fetchProject();
+  };
   
   const handleVideoPlay = () => {
     if (project.video) {
