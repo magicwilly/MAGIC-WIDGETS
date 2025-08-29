@@ -256,14 +256,22 @@ const EditProject = ({ project, onUpdate, isCreator }) => {
         </DialogHeader>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="mt-4">
-          <TabsList className="grid w-full grid-cols-2">
+          <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="story" className="flex items-center gap-2">
               <FileText className="h-4 w-4" />
-              Edit Story
+              Story
             </TabsTrigger>
             <TabsTrigger value="updates" className="flex items-center gap-2">
               <Calendar className="h-4 w-4" />
-              Add Update
+              Updates
+            </TabsTrigger>
+            <TabsTrigger value="faqs" className="flex items-center gap-2">
+              <MessageCircle className="h-4 w-4" />
+              FAQs
+            </TabsTrigger>
+            <TabsTrigger value="rewards" className="flex items-center gap-2">
+              <DollarSign className="h-4 w-4" />
+              Rewards
             </TabsTrigger>
           </TabsList>
 
