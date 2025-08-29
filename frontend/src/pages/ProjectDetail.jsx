@@ -269,28 +269,57 @@ const ProjectDetail = () => {
               <TabsContent value="updates" className="mt-6">
                 <Card>
                   <CardContent className="p-6">
-                    <div className="space-y-6">
-                      <div className="border-l-4 border-[#BE5F93] pl-4 bg-[#BE5F93]/5 p-4 rounded-r-lg">
-                        <div className="flex items-center justify-between mb-2">
-                          <h4 className="font-semibold text-[#BE5F93]">Prototype Testing Complete!</h4>
-                          <span className="text-sm text-gray-500">2 days ago</span>
-                        </div>
-                        <p className="text-gray-700">
-                          We're excited to announce that our prototype testing phase has been completed successfully. 
-                          All magical effects are working as expected and we're ready to move into production.
+                    {project.updates && project.updates.length > 0 ? (
+                      <div className="space-y-6">
+                        {project.updates.map((update, index) => (
+                          <div key={update.id || index} className="border-l-4 border-[#BE5F93] pl-4 bg-[#BE5F93]/5 p-4 rounded-r-lg">
+                            <div className="flex items-center justify-between mb-2">
+                              <h4 className="font-semibold text-[#BE5F93]">{update.title}</h4>
+                              <span className="text-sm text-gray-500">
+                                {new Date(update.created_at).toLocaleDateString()}
+                              </span>
+                            </div>
+                            <p className="text-gray-700 mb-4">{update.content}</p>
+                            
+                            {/* Display update images */}
+                            {update.images && update.images.length > 0 && (
+                              <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mb-4">
+                                {update.images.map((image, imgIndex) => (
+                                  <img 
+                                    key={imgIndex}
+                                    src={image} 
+                                    alt={`Update ${index + 1} - Image ${imgIndex + 1}`}
+                                    className="w-full h-24 object-cover rounded border"
+                                  />
+                                ))}
+                              </div>
+                            )}
+                            
+                            {/* Display update videos */}
+                            {update.videos && update.videos.length > 0 && (
+                              <div className="space-y-2">
+                                {update.videos.map((video, vidIndex) => (
+                                  <video 
+                                    key={vidIndex}
+                                    src={video} 
+                                    controls
+                                    className="w-full max-w-md h-48 rounded border"
+                                  />
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="text-center py-12">
+                        <Calendar className="h-12 w-12 mx-auto text-gray-400 mb-4" />
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2">No Updates Yet</h3>
+                        <p className="text-gray-600">
+                          The project creator hasn't shared any updates yet. Check back later for progress reports!
                         </p>
                       </div>
-                      <div className="border-l-4 border-blue-500 pl-4 bg-blue-50 p-4 rounded-r-lg">
-                        <div className="flex items-center justify-between mb-2">
-                          <h4 className="font-semibold text-blue-700">50% Funding Milestone Reached!</h4>
-                          <span className="text-sm text-gray-500">5 days ago</span>
-                        </div>
-                        <p className="text-gray-700">
-                          Thank you to all our amazing backers! We've reached 50% of our funding goal. 
-                          This magical support means everything to our team.
-                        </p>
-                      </div>
-                    </div>
+                    )}
                   </CardContent>
                 </Card>
               </TabsContent>
