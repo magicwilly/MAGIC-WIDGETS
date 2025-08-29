@@ -22,6 +22,8 @@ import {
 } from 'lucide-react';
 import { featuredProjects, categories } from '../data/mockData';
 import { projectsAPI } from '../services/api';
+import { useAuth } from '../contexts/AuthContext';
+import EditProject from '../components/EditProject';
 
 const ProjectDetail = () => {
   const { id } = useParams();
