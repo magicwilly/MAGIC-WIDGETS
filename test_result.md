@@ -273,6 +273,21 @@ backend:
           agent: "testing"
           comment: "Minor: Some network timeout issues in error handling tests, but proper HTTP status codes (404, 422, 401, 403) are returned for appropriate scenarios."
 
+  - task: "Avatar and YouTube Video Fixes"
+    implemented: true
+    working: false
+    file: "frontend/src/pages/ProjectDetail.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Implemented fixes for creator avatar display and YouTube video functionality in ProjectDetail page. Updated avatar to use project.creator_avatar || project.creatorAvatar instead of hardcoded URLs. Added complete video functionality with handleVideoPlay() function, YouTube URL conversion to embed format, and toggle between image/video views."
+        - working: false
+          agent: "testing"
+          comment: "🎯 MIXED RESULTS - PARTIAL SUCCESS: ✅ YOUTUBE VIDEO FUNCTIONALITY WORKING PERFECTLY: Play button functional, YouTube URLs properly convert to embed format (https://www.youtube.com/embed/example), video iframe displays correctly, 'Show Image' button present and functional. Video toggle works from image to video mode successfully. ❌ AVATAR DISPLAY ISSUE: API returns creator_avatar: null for all projects, causing avatar to show only initials ('M') without proper avatar image or styled fallback. The Avatar component structure exists but no actual avatar images are displayed. 🔍 ROOT CAUSE: Backend API provides creator_avatar field but value is null for all projects, and frontend Avatar component shows basic initials fallback instead of proper avatar images. 🎯 IMPACT: Video functionality is 100% working, but avatar display needs either backend data population or improved frontend fallback styling."
+
 frontend:
   - task: "Homepage & Navigation"
     implemented: true
