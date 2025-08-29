@@ -104,6 +104,16 @@ export const projectsAPI = {
     return response.data;
   },
   
+  updateProjectStory: async (projectId, storyData) => {
+    const response = await apiClient.patch(`/projects/${projectId}/story`, storyData);
+    return response.data;
+  },
+  
+  addProjectUpdate: async (projectId, updateData) => {
+    const response = await apiClient.post(`/projects/${projectId}/updates`, updateData);
+    return response.data;
+  },
+  
   deleteProject: async (projectId) => {
     const response = await apiClient.delete(`/projects/${projectId}`);
     return response.data;
