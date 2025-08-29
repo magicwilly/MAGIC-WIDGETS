@@ -265,6 +265,9 @@ const EditProject = ({ project, onUpdate, isCreator }) => {
                     placeholder="Tell the story of your magic project..."
                     className="min-h-[200px] mt-2"
                   />
+                  <div className="text-xs text-gray-500 mt-1">
+                    Debug: Story length: {story?.length || 0} characters
+                  </div>
                 </div>
 
                 {/* Media Upload for Story */}
