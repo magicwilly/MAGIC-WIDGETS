@@ -546,6 +546,227 @@ const EditProject = ({ project, onUpdate, isCreator }) => {
               </Card>
             )}
           </TabsContent>
+
+          {/* FAQs Tab */}
+          <TabsContent value="faqs" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-lg">
+                  <MessageCircle className="h-5 w-5 text-[#BE5F93]" />
+                  Project FAQs
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {/* Add New FAQ */}
+                <div className="space-y-4">
+                  <div>
+                    <Label htmlFor="faqQuestion">Question</Label>
+                    <Input
+                      id="faqQuestion"
+                      value={newFaq.question}
+                      onChange={(e) => setNewFaq(prev => ({ ...prev, question: e.target.value }))}
+                      placeholder="What is included in this magic project?"
+                      className="mt-2"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="faqAnswer">Answer</Label>
+                    <Textarea
+                      id="faqAnswer"
+                      value={newFaq.answer}
+                      onChange={(e) => setNewFaq(prev => ({ ...prev, answer: e.target.value }))}
+                      placeholder="Provide a clear answer to help potential backers..."
+                      className="min-h-[100px] mt-2"
+                    />
+                  </div>
+                  <Button
+                    onClick={() => {
+                      if (newFaq.question && newFaq.answer) {
+                        setFaqs(prev => [...prev, { ...newFaq, id: Date.now() }]);
+                        setNewFaq({ question: '', answer: '' });
+                      }
+                    }}
+                    className="bg-[#BE5F93] hover:bg-[#a04d7d] text-white"
+                  >
+                    <Plus className="h-4 w-4 mr-2" />
+                    Add FAQ
+                  </Button>
+                </div>
+
+                {/* Existing FAQs */}
+                {faqs.length > 0 && (
+                  <div className="space-y-3">
+                    <h4 className="font-semibold">Current FAQs</h4>
+                    {faqs.map((faq, index) => (
+                      <div key={faq.id || index} className="border rounded-lg p-4 space-y-2">
+                        <div className="flex justify-between items-start">
+                          <h5 className="font-medium text-[#BE5F93]">{faq.question}</h5>
+                          <Button
+                            size="sm"
+                            variant="destructive"
+                            onClick={() => setFaqs(prev => prev.filter((_, i) => i !== index))}
+                          >
+                            <Trash2 className="h-3 w-3" />
+                          </Button>
+                        </div>
+                        <p className="text-gray-600 text-sm">{faq.answer}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          {/* Rewards Tab */}
+          <TabsContent value="rewards" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-lg">
+                  <DollarSign className="h-5 w-5 text-[#BE5F93]" />
+                  Reward Tiers
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {/* Add New Reward */}
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="rewardTitle">Reward Title</Label>
+                      <Input
+                        id="rewardTitle"
+                        value={newReward.title}
+                        onChange={(e) => setNewReward(prev => ({ ...prev, title: e.target.value }))}
+                        placeholder="Magic Starter Pack"
+                        className="mt-2"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="rewardAmount">Amount ($)</Label>
+                      <Input
+                        id="rewardAmount"
+                        type="number"
+                        value={newReward.amount}
+                        onChange={(e) => setNewReward(prev => ({ ...prev, amount: e.target.value }))}
+                        placeholder="25"
+                        className="mt-2"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="rewardDescription">Description</Label>
+                    <Textarea
+                      id="rewardDescription"
+                      value={newReward.description}
+                      onChange={(e) => setNewReward(prev => ({ ...prev, description: e.target.value }))}
+                      placeholder="What backers will receive for this reward tier..."
+                      className="min-h-[100px] mt-2"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="rewardDelivery">Expected Delivery</Label>
+                      <Input
+                        id="rewardDelivery"
+                        type="date"
+                        value={newReward.deliveryDate}
+                        onChange={(e) => setNewReward(prev => ({ ...prev, deliveryDate: e.target.value }))}
+                        className="mt-2"
+                      />
+                    </div>
+                    <div>
+                      <Label>Reward Image</Label>
+                      <div className="mt-2">
+                        <input
+                          type="file"
+                          ref={rewardImageInputRef}
+                          accept="image/*"
+                          onChange={(e) => {
+                            const file = e.target.files[0];
+                            if (file) {
+                              const imageUrl = URL.createObjectURL(file);
+                              setNewReward(prev => ({ ...prev, image: imageUrl }));
+                            }
+                          }}
+                          className="hidden"
+                        />
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => rewardImageInputRef.current?.click()}
+                          className="w-full border-dashed border-[#BE5F93]/30 hover:border-[#BE5F93]/50"
+                        >
+                          <ImageIcon className="h-4 w-4 mr-2" />
+                          Add Image
+                        </Button>
+                        {newReward.image && (
+                          <div className="mt-2 relative">
+                            <img src={newReward.image} alt="Reward preview" className="w-full h-20 object-cover rounded border" />
+                            <Button
+                              type="button"
+                              size="sm"
+                              variant="destructive"
+                              onClick={() => setNewReward(prev => ({ ...prev, image: '' }))}
+                              className="absolute top-1 right-1 h-6 w-6 p-0"
+                            >
+                              <X className="h-3 w-3" />
+                            </Button>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  <Button
+                    onClick={() => {
+                      if (newReward.title && newReward.description && newReward.amount) {
+                        setRewards(prev => [...prev, { ...newReward, id: Date.now() }]);
+                        setNewReward({ title: '', description: '', amount: '', deliveryDate: '', image: '' });
+                      }
+                    }}
+                    className="bg-[#BE5F93] hover:bg-[#a04d7d] text-white"
+                  >
+                    <Plus className="h-4 w-4 mr-2" />
+                    Add Reward Tier
+                  </Button>
+                </div>
+
+                {/* Existing Rewards */}
+                {rewards.length > 0 && (
+                  <div className="space-y-3">
+                    <h4 className="font-semibold">Current Reward Tiers</h4>
+                    {rewards.map((reward, index) => (
+                      <div key={reward.id || index} className="border rounded-lg p-4 space-y-2">
+                        <div className="flex justify-between items-start">
+                          <div className="flex items-center gap-2">
+                            <h5 className="font-medium text-[#BE5F93]">{reward.title}</h5>
+                            <Badge variant="outline">${reward.amount}</Badge>
+                          </div>
+                          <Button
+                            size="sm"
+                            variant="destructive"
+                            onClick={() => setRewards(prev => prev.filter((_, i) => i !== index))}
+                          >
+                            <Trash2 className="h-3 w-3" />
+                          </Button>
+                        </div>
+                        <p className="text-gray-600 text-sm">{reward.description}</p>
+                        {reward.deliveryDate && (
+                          <p className="text-xs text-gray-500">Expected delivery: {reward.deliveryDate}</p>
+                        )}
+                        {reward.image && (
+                          <img src={reward.image} alt="Reward" className="w-16 h-16 object-cover rounded border" />
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
         </Tabs>
       </DialogContent>
     </Dialog>
