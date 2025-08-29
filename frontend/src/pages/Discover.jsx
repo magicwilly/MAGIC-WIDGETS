@@ -7,6 +7,7 @@ import { Badge } from '../components/ui/badge';
 import ProjectCard from '../components/ProjectCard';
 import { Search, Filter, Grid, List, Sparkles } from 'lucide-react';
 import { featuredProjects, categories } from '../data/mockData';
+import { projectsAPI } from '../services/api';
 
 const Discover = () => {
   const { category: urlCategory } = useParams();
@@ -15,6 +16,36 @@ const Discover = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('trending');
   const [showFilters, setShowFilters] = useState(false);
+  const [projects, setProjects] = useState(featuredProjects); // Start with mock data as fallback
+  const [loading, setLoading] = useState(false);
+
+  // Fetch projects from API
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        setLoading(true);
+        console.log('🔍 Discover: Fetching projects from API...');
+        
+        const apiProjects = await projectsAPI.getProjects();
+        console.log('🔍 Discover: API projects response:', apiProjects);
+        
+        if (apiProjects && apiProjects.length > 0) {
+          setProjects(apiProjects);
+          console.log('🔍 Discover: Using API projects, count:', apiProjects.length);
+        } else {
+          console.log('🔍 Discover: No API projects found, using mock data');
+        }
+      } catch (error) {
+        console.error('❌ Discover: Error fetching projects from API:', error);
+        console.log('🔍 Discover: Falling back to mock data');
+        // Keep using mock data as fallback
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
 
   // Update selectedCategory when URL parameter changes
   useEffect(() => {
