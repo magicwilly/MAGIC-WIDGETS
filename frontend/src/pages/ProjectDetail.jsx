@@ -206,9 +206,11 @@ const ProjectDetail = () => {
 
               {/* Creator Info */}
               <div className="flex items-center p-4 bg-white rounded-lg border">
-                <Avatar className="h-12 w-12 mr-4">
+                <Avatar className="h-12 w-12 mr-4 border-2 border-[#BE5F93]/20">
                   <AvatarImage src={project.creator_avatar || project.creatorAvatar} />
-                  <AvatarFallback className="bg-[#BE5F93]/10 text-[#BE5F93]">{creator.charAt(0)}</AvatarFallback>
+                  <AvatarFallback className="bg-gradient-to-br from-[#BE5F93] to-[#a04d7d] text-white font-bold text-lg">
+                    {creator.charAt(0).toUpperCase()}
+                  </AvatarFallback>
                 </Avatar>
                 <div className="flex-1">
                   <h3 className="font-semibold text-gray-900">{creator}</h3>
