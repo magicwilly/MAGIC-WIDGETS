@@ -18,6 +18,7 @@ export const featuredProjects = [
     video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     description: "A groundbreaking card deck that enables impossible card tricks through innovative design and mechanics.",
     fullDescription: "The Quantum Deck represents a quantum leap in card magic technology. Each card features micro-engineered surfaces that allow for revolutionary handling techniques never before possible. Developed by world-renowned magician Magnus the Mystifier in collaboration with MIT engineers.",
+    story: "This revolutionary card magic system began as a dream three years ago when I witnessed a young street magician struggling with worn-out cards that constantly revealed their secrets. I knew there had to be a better way.\n\nAfter countless hours of research and collaboration with MIT engineering students, we've developed the Quantum Deck - a breakthrough in card magic technology. Each card in this deck features proprietary micro-engineered surfaces that enable handling techniques never before possible.\n\nThe secret lies in the quantum-level surface treatment that allows cards to interact in ways that defy conventional physics. Whether you're performing close-up magic or stage illusions, the Quantum Deck opens up entirely new realms of possibility.\n\nWith your support, we can bring this innovation to magicians worldwide and revolutionize the art of card magic forever.",
     fundingGoal: 75000,
     currentFunding: 52340,
     backers: 418,
