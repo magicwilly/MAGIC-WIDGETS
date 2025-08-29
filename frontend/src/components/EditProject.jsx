@@ -380,11 +380,19 @@ const EditProject = ({ project, onUpdate, isCreator }) => {
                   <div>
                     <Label>Update Images</Label>
                     <div className="mt-2 space-y-2">
+                      <input
+                        type="file"
+                        ref={updateImageInputRef}
+                        accept="image/*"
+                        multiple
+                        onChange={(e) => Array.from(e.target.files).forEach(file => handleFileUpload(file, 'image', 'update'))}
+                        className="hidden"
+                      />
                       <Button
                         type="button"
                         variant="outline"
                         size="sm"
-                        onClick={() => fileInputRef.current?.click()}
+                        onClick={() => updateImageInputRef.current?.click()}
                         className="w-full border-dashed border-[#BE5F93]/30 hover:border-[#BE5F93]/50"
                       >
                         <ImageIcon className="h-4 w-4 mr-2" />
@@ -411,11 +419,19 @@ const EditProject = ({ project, onUpdate, isCreator }) => {
                   <div>
                     <Label>Update Videos</Label>
                     <div className="mt-2 space-y-2">
+                      <input
+                        type="file"
+                        ref={updateVideoInputRef}
+                        accept="video/*"
+                        multiple
+                        onChange={(e) => Array.from(e.target.files).forEach(file => handleFileUpload(file, 'video', 'update'))}
+                        className="hidden"
+                      />
                       <Button
                         type="button"
                         variant="outline"
                         size="sm"
-                        onClick={() => videoInputRef.current?.click()}
+                        onClick={() => updateVideoInputRef.current?.click()}
                         className="w-full border-dashed border-[#BE5F93]/30 hover:border-[#BE5F93]/50"
                       >
                         <Video className="h-4 w-4 mr-2" />
